@@ -14,7 +14,6 @@ Import your WhatsApp chat and show you some cool stats
 - max/min/mean response time (pro version)
 - session durations (?)
 
-
 ### Words based
 
 #### Ranks

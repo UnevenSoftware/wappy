@@ -483,18 +483,18 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.0.4.tgz#6dc50f593bdfdeaa6183d1dbc15e2d45e7c6b8b3"
   integrity sha512-Swfbz31AaMX48CpFl+YmIrqOH9MgJMTrltG9e26A4ZxYx9LjGuMV+41WnxFzS3Bc9nbrc6sDPM37G6nIT8NJSg==
 
-"@vueuse/core@^4.0.0-beta.11":
-  version "4.0.0-rc.8"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.0.0-rc.8.tgz#d4d1521d8bf1f5a5c45cac4cb81812c9f1d91d1e"
-  integrity sha512-xQGBl9tUMnk0QpqQzdf/awMUW3sQPD9iM2IzmUfcygF43CDDAaoUT8mjH6v8oTm304IJYcjueW2VzqlonxPjwQ==
+"@vueuse/core@^4.2.0-beta.2":
+  version "4.2.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.2.0-beta.2.tgz#2b3dbb33980ba8ed6c3dc1596d78e1bf2d3eb6c3"
+  integrity sha512-7+qduqlJABs28TTiMLKa3wow88c/+C23Aa9klmoN70L3R7GSqxGTr3CaAy56/LZ+dnHmdx4DHrtAmRu0988XNQ==
   dependencies:
-    "@vueuse/shared" "4.0.0-rc.8"
+    "@vueuse/shared" "4.2.0-beta.2"
     vue-demi latest
 
-"@vueuse/shared@4.0.0-rc.8":
-  version "4.0.0-rc.8"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.0.0-rc.8.tgz#4f948ad3a5600daaadd3136480ddd26e1cd8f246"
-  integrity sha512-oXPPaKAAdknvXD/unbqsXdZ2E0w1iMYrgAvEqd82ei9STyGBhPL4mQ1aXq4uKwFpVi1Qt6GxXRfAurbvbDox2Q==
+"@vueuse/shared@4.2.0-beta.2":
+  version "4.2.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.2.0-beta.2.tgz#1de8e7168ed76625764b1e6c6e2dba59575e68d0"
+  integrity sha512-j/5yUtFYi6c3R5xSKOjIQb4lU4sFfxyptcNdan+TikjRO9jGS8nvtrFMieoPhjYbKxwsDhjwI43XjjV5SkRyNQ==
   dependencies:
     vue-demi latest
 

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@iconify/iconify": "^1.0.7",
-    "@vueuse/core": "^4.0.0-beta.11",
+    "@vueuse/core": "^4.2.0-beta.2",
     "vue": "^3.0.0-rc.10",
     "vue-router": "^4.0.0-beta.12"
   },
