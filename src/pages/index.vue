@@ -1,5 +1,6 @@
 <template>
-  <div class="p-4">
+  <div v-if="stats" class="p-4">Stats: {{ stats }}</div>
+  <div v-else class="p-4">
     <label for="file-upload" class="btn custom-file-upload"> Upload you file </label>
     <input id="file-upload" type="file" @change="fileSelected" accept=".txt" />
   </div>
@@ -12,11 +13,11 @@
 
 <script lang="ts">
 import { defineComponent, watch } from 'vue'
-import useStats from '/@/utils/useStats'
+import useStats from '/@/composable/useStats'
 
 export default defineComponent({
   setup() {
-    const { stats, readFile } = useStats()
+    const { stats, readFile, loading } = useStats()
 
     watch(stats, (v) => console.log('stats', v))
 
@@ -28,7 +29,9 @@ export default defineComponent({
     }
 
     return {
-      fileSelected
+      fileSelected,
+      stats,
+      loading
     }
   }
 })

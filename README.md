@@ -1,6 +1,13 @@
 # Wa
 Import your WhatsApp chat and show you some cool stats
 
+### MVP
+- count per person
+- top 10 words/emoji per person
+- hours distribuiton
+- media over messages (%)
+- response time per person (?)
+
 ## Stats
 
 ### Time based

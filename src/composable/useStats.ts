@@ -10,9 +10,8 @@ interface IUseStats {
   loading: Ref<boolean>
   stats: Ref<Stats | undefined>
   error: Ref<Error | undefined>
+  progress: Ref<number>
 }
-
-
 
 const heavyStats = async (file: File): Promise<Stats> => {
 
@@ -32,19 +31,26 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   const content = await readFileAsync(file)
   const lines = content.split("\n")
+
+
   return { count: lines.length }
 }
 
-const { workerFn } = useWebWorkerFn(heavyStats)
+const { workerFn } = useWebWorkerFn(heavyStats, {})
 
 
 
 const useStats = (mock?: Stats): IUseStats => {
-  const loading = ref<boolean>(false)
+
   const stats = ref<Stats | undefined>(mock)
+
+  const loading = ref<boolean>(false)
+  const progress = ref<number>(0) // 0 -> 1
+
   const error = ref<Error | undefined>(undefined)
 
   const readFile = async (file: File) => {
+    console.time("readFile")
     loading.value = true
 
     try {
@@ -56,14 +62,15 @@ const useStats = (mock?: Stats): IUseStats => {
     } finally {
       loading.value = false
     }
-
+    console.timeEnd("readFile")
   }
 
   return {
     loading,
     stats,
     error,
-    readFile
+    readFile,
+    progress,
   }
 }
 
