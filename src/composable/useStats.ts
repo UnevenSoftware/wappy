@@ -6,7 +6,7 @@ interface Stats {
   usersStats?: Map<string, UserStats>,
 }
 
-interface UserStats{
+interface UserStats {
   user: string,
   messages: string[],
   messagesCount?: number
@@ -38,51 +38,39 @@ const heavyStats = async (file: File): Promise<Stats> => {
       reader.readAsText(file)
     })
   }
-  console.log(`Reading File: ${file.name} | ${(file.size/1024).toFixed(2)}KB`);
+  console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
   const stats: Stats = {}
-  /**
-   * TODO: another possibile way?
-   */
-  /*
-  const lines = content.split('\n');
-  const matches: Message[] = [];
-  for(const line of lines){
-    const msg: Message = {};
-    msg.datetime = line.substring(0,17);
-    msg.user = line.substring(19, 19+line.substring(19).indexOf(':')).trim();
-    msg.message = line.substring(21+line.substring(19).indexOf(':'));
-    matches.push(msg);
-  }
-  */
-  
-  // datime : ^(\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{1,2}\s[A|P]M)
-  // user : (\w+)
-  // message : ([^/]+(\n))
-  //const re = /(\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{1,2}\s[A|P]M)\s-\s(\w+):\s(.+)/g;
-  const re = /(\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{1,2}\s[A|P]M)\s-\s(\w+):\s([^/]+(\n))/g
+
+  // date: (\d{1,2}\/\d{1,2}\/\d{2,4})
+  // time: (.*?)
+  // user : (.*?)
+  // message: (.+[^/]+\n)
+
+  const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
   const matches = [...content.matchAll(re)];
+
   stats.count = matches.length;
   stats.usersStats = new Map();
-  for(const match of matches){
+  for (const match of matches) {
     //const [matches] = [...line.matchAll(re)]; // todo: could 
     const msg: Message = {};
-    const [all, datetime, user, message] = match; 
-    msg.datetime = datetime;
+    const [_, date, time, user, message] = match;
+    msg.datetime = `${date} ${time}`;
     msg.user = user;
     msg.message = message;
 
-    if(stats.usersStats?.has(msg.user)){
+    if (stats.usersStats?.has(msg.user)) {
       stats.usersStats?.get(msg.user)?.messages.push(msg.message)
       //stats.users?.get(msg.user)?.messagesCount++;
     } else {
-      const us : UserStats = {user: "", messages: []};
+      const us: UserStats = { user: "", messages: [] };
       us.user = msg.user;
       us.messages.push(message);
       stats.usersStats?.set(msg.user, us);
     }
   }
-  console.log(stats)
+  // console.log(stats)
   return stats;
 }
 
