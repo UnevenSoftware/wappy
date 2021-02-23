@@ -1,7 +1,14 @@
 <template>
-  <div v-if="stats" class="p-4">Stats: {{ stats }}</div>
+  <div v-if="stats" class="p-4">
+    <label>Total number of messages: {{stats.count}}</label>
+    <div v-if="stats.usersStats">
+      <div  v-for="stat in stats.usersStats.values()" :key="stat.id">
+        <label>{{stat.user}}: {{stat.messages.length}} messages</label>
+      </div>
+    </div>
+  </div>
   <div v-else class="p-4">
-    <label for="file-upload" class="btn custom-file-upload"> Upload you file </label>
+    <label for="file-upload" class="btn custom-file-upload"> Upload your file </label>
     <input id="file-upload" type="file" @change="fileSelected" accept=".txt" />
   </div>
 </template>

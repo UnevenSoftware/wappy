@@ -2,7 +2,14 @@ import { ref, Ref } from 'vue'
 import { useWebWorkerFn } from '@vueuse/core'
 
 interface Stats {
-  count: number,
+  count?: number,
+  usersStats?: Map<string, UserStats>,
+}
+
+interface UserStats{
+  user: string,
+  messages: string[],
+  messagesCount?: number
 }
 
 interface Message {
@@ -17,7 +24,6 @@ interface IUseStats {
   stats: Ref<Stats | undefined>
   error: Ref<Error | undefined>
   progress: Ref<number>
-
 }
 const heavyStats = async (file: File): Promise<Stats> => {
   const readFileAsync = (file: File): Promise<string> => {
@@ -32,30 +38,52 @@ const heavyStats = async (file: File): Promise<Stats> => {
       reader.readAsText(file)
     })
   }
-
+  console.log(`Reading File: ${file.name} | ${(file.size/1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
+  const stats: Stats = {}
+  /**
+   * TODO: another possibile way?
+   */
+  /*
   const lines = content.split('\n');
+  const matches: Message[] = [];
+  for(const line of lines){
+    const msg: Message = {};
+    msg.datetime = line.substring(0,17);
+    msg.user = line.substring(19, 19+line.substring(19).indexOf(':')).trim();
+    msg.message = line.substring(21+line.substring(19).indexOf(':'));
+    matches.push(msg);
+  }
+  */
+  
   // datime : ^(\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{1,2}\s[A|P]M)
-  // author : (\w+)
-  // message : 
-  const re = /(\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{1,2}\s[A|P]M)\s-\s(\w+):\s(.+)/g;
-  
+  // user : (\w+)
+  // message : ([^/]+(\n))
+  //const re = /(\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{1,2}\s[A|P]M)\s-\s(\w+):\s(.+)/g;
+  const re = /(\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{1,2}\s[A|P]M)\s-\s(\w+):\s([^/]+(\n))/g
   const matches = [...content.matchAll(re)];
-  console.log(matches);
-  
+  stats.count = matches.length;
+  stats.usersStats = new Map();
   for(const match of matches){
-    //const [matches] = [...line.matchAll(re)];
-    console.log(match)
+    //const [matches] = [...line.matchAll(re)]; // todo: could 
     const msg: Message = {};
     const [all, datetime, user, message] = match; 
     msg.datetime = datetime;
     msg.user = user;
     msg.message = message;
-    console.log(msg);
-  }
-  
 
-  return { count: lines.length }
+    if(stats.usersStats?.has(msg.user)){
+      stats.usersStats?.get(msg.user)?.messages.push(msg.message)
+      //stats.users?.get(msg.user)?.messagesCount++;
+    } else {
+      const us : UserStats = {user: "", messages: []};
+      us.user = msg.user;
+      us.messages.push(message);
+      stats.usersStats?.set(msg.user, us);
+    }
+  }
+  console.log(stats)
+  return stats;
 }
 
 const { workerFn } = useWebWorkerFn(heavyStats, {})
@@ -71,7 +99,7 @@ const useStats = (mock?: Stats): IUseStats => {
     console.time("readFile")
     loading.value = true
     try {
-      stats.value = await workerFn(file);//await workerFn(file)
+      stats.value = await workerFn(file);
       console.log(stats.value)
     } catch (e) {
       console.error(e)
