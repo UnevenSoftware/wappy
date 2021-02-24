@@ -191,6 +191,13 @@
     "@types/connect" "*"
     "@types/node" "*"
 
+"@types/chart.js@^2.9.29":
+  version "2.9.30"
+  resolved "https://registry.yarnpkg.com/@types/chart.js/-/chart.js-2.9.30.tgz#34b99897f4f5ef0f74c8fe4ced70ac52b4d752dd"
+  integrity sha512-EgjxUUZFvf6ls3kW2CwyrnSJhgyKxgwrlp/W5G9wqyPEO9iFatO63zAA7L24YqgMxiDjQ+tG7ODU+2yWH91lPg==
+  dependencies:
+    moment "^2.10.2"
+
 "@types/connect@*":
   version "3.4.34"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.34.tgz#170a40223a6d666006d93ca128af2beb1d9b1901"
@@ -416,6 +423,17 @@
     estree-walker "^2.0.1"
     source-map "^0.6.1"
 
+"@vue/compiler-core@3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-core/-/compiler-core-3.0.6.tgz#265bbe0711a81ab4c1344f8294e22e2d08ca167d"
+  integrity sha512-O7QzQ39DskOoPpEDWRvKwDX7Py9UNT7SvLHvBdIfckGA3OsAEBdiAtuYQNcVmUDeBajm+08v5wyvHWBbWgkilQ==
+  dependencies:
+    "@babel/parser" "^7.12.0"
+    "@babel/types" "^7.12.0"
+    "@vue/shared" "3.0.6"
+    estree-walker "^2.0.1"
+    source-map "^0.6.1"
+
 "@vue/compiler-dom@3.0.4", "@vue/compiler-dom@^3.0.3":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@vue/compiler-dom/-/compiler-dom-3.0.4.tgz#834fd4b15c5698cf9f4505c2bfbccca058a843eb"
@@ -423,6 +441,14 @@
   dependencies:
     "@vue/compiler-core" "3.0.4"
     "@vue/shared" "3.0.4"
+
+"@vue/compiler-dom@3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-dom/-/compiler-dom-3.0.6.tgz#f94c3959320a1252915bd02b943f96a7ee3fc951"
+  integrity sha512-q1wfHzYwvDRAhBlx+Qa+n3Bu5nHr1qL/j0UbpNlbQDwIlt9zpvmXUrUCL+i55Bh5lLKvSe+mNo0qlwNEApm+jA==
+  dependencies:
+    "@vue/compiler-core" "3.0.6"
+    "@vue/shared" "3.0.6"
 
 "@vue/compiler-sfc@^3.0.0-rc.10", "@vue/compiler-sfc@^3.0.3":
   version "3.0.4"
@@ -461,6 +487,13 @@
   dependencies:
     "@vue/shared" "3.0.4"
 
+"@vue/reactivity@3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.0.6.tgz#7b16f3d5d04cc55028085fff0bb8475cc0e32991"
+  integrity sha512-hX8PnZayNMoljWSYrZW0OclQnRaMoHxvi5eeFVFPDr7+tzBeiftmmozKttxxCLoDxBWX1B4gNc237DIcYU63Lw==
+  dependencies:
+    "@vue/shared" "3.0.6"
+
 "@vue/runtime-core@3.0.4":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@vue/runtime-core/-/runtime-core-3.0.4.tgz#a5b9a001560b1fd8c01a43f68b764c555de7836c"
@@ -468,6 +501,14 @@
   dependencies:
     "@vue/reactivity" "3.0.4"
     "@vue/shared" "3.0.4"
+
+"@vue/runtime-core@3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@vue/runtime-core/-/runtime-core-3.0.6.tgz#d16779b5664593f1d25be677fb1b1968024aa532"
+  integrity sha512-x6N38P0DeMyrHiAxCE/rACHTyydOzlg8IyUIPkSJ4rrSkuJnAtFKQicK6fm8NuD21dwdPr8KcZ4Cn4xaqL1JJg==
+  dependencies:
+    "@vue/reactivity" "3.0.6"
+    "@vue/shared" "3.0.6"
 
 "@vue/runtime-dom@3.0.4":
   version "3.0.4"
@@ -478,10 +519,24 @@
     "@vue/shared" "3.0.4"
     csstype "^2.6.8"
 
+"@vue/runtime-dom@3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@vue/runtime-dom/-/runtime-dom-3.0.6.tgz#e7d6c61913d871f1f020a9a81b558c8fcbeba8c6"
+  integrity sha512-Y6y4Tak9//VXB2mp2NVQxbwC4a5xsnJpotpo8yBAB3qB3L4v4HQLpqxSkwThRwI6Y6Z7dydX/sgfraqLBE8BWg==
+  dependencies:
+    "@vue/runtime-core" "3.0.6"
+    "@vue/shared" "3.0.6"
+    csstype "^2.6.8"
+
 "@vue/shared@3.0.4":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.0.4.tgz#6dc50f593bdfdeaa6183d1dbc15e2d45e7c6b8b3"
   integrity sha512-Swfbz31AaMX48CpFl+YmIrqOH9MgJMTrltG9e26A4ZxYx9LjGuMV+41WnxFzS3Bc9nbrc6sDPM37G6nIT8NJSg==
+
+"@vue/shared@3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.0.6.tgz#d65576430fc4ad383dc7c829118798e5169178d4"
+  integrity sha512-c37C60HpelUZIx+SNZVEINSxkFzQYhIXFg5AynnIA4QDBmY4iSPoACfGSwSUTCTKImukPeCgY2oqRJVP3R1Mnw==
 
 "@vueuse/core@^4.2.0-beta.2":
   version "4.2.0-beta.2"
@@ -742,6 +797,29 @@ chalk@^2.0.0, chalk@^2.4.1, chalk@^2.4.2:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chart.js@^2.9.4:
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.9.4.tgz#0827f9563faffb2dc5c06562f8eb10337d5b9684"
+  integrity sha512-B07aAzxcrikjAPyV+01j7BmOpxtQETxTSlQ26BEYJ+3iUkbNKaOJ/nDbT6JjyqYxseM0ON12COHYdU2cTIjC7A==
+  dependencies:
+    chartjs-color "^2.1.0"
+    moment "^2.10.2"
+
+chartjs-color-string@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/chartjs-color-string/-/chartjs-color-string-0.6.0.tgz#1df096621c0e70720a64f4135ea171d051402f71"
+  integrity sha512-TIB5OKn1hPJvO7JcteW4WY/63v6KwEdt6udfnDE9iCAZgy+V4SrbSxoIbTw/xkUIapjEI4ExGtD0+6D3KyFd7A==
+  dependencies:
+    color-name "^1.0.0"
+
+chartjs-color@^2.1.0:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/chartjs-color/-/chartjs-color-2.4.1.tgz#6118bba202fe1ea79dd7f7c0f9da93467296c3b0"
+  integrity sha512-haqOg1+Yebys/Ts/9bLo/BqUcONQOdr/hoEr2LLTRl6C5LXctUdHxsCYfvQVg5JIxITrfCNUDr4ntqmQk9+/0w==
+  dependencies:
+    chartjs-color-string "^0.6.0"
+    color-convert "^1.9.3"
+
 chokidar@^3.4.2:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.4.3.tgz#c1df38231448e45ca4ac588e6c79573ba6a57d5b"
@@ -786,7 +864,7 @@ co@^4.6.0:
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   integrity sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=
 
-color-convert@^1.9.0, color-convert@^1.9.1:
+color-convert@^1.9.0, color-convert@^1.9.1, color-convert@^1.9.3:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
   integrity sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==
@@ -877,6 +955,11 @@ cookies@~0.8.0:
   dependencies:
     depd "~2.0.0"
     keygrip "~1.1.0"
+
+core-js@^3.6.5:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.9.0.tgz#790b1bb11553a2272b36e2625c7179db345492f8"
+  integrity sha512-PyFBJaLq93FlyYdsndE5VaueA9K5cNB7CGzeCj191YYLhkQM0gdZR2SKihM70oF0wdqKSKClv/tEBOpoRmdOVQ==
 
 cosmiconfig@^7.0.0:
   version "7.0.0"
@@ -2007,6 +2090,11 @@ minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
+moment@^2.10.2:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -2381,7 +2469,7 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@^2.1.2:
+prettier@^2.1.2, prettier@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
   integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
@@ -3014,6 +3102,26 @@ vue-router@^4.0.0-beta.12, vue-router@^4.0.0-beta.4:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.1.tgz#309240e50524b1e7d4e82e27f0a0fa25fe3d1d71"
   integrity sha512-2C2nRxA2nCusgJyUpvcbd9Bnc9kACp/VLUCK4drXtgeRXHjQliZJcgjjP268vkGvvEKun9jjp8Ic1PpzUgbYKg==
+
+vue3-chart-v2@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/vue3-chart-v2/-/vue3-chart-v2-0.8.1.tgz#7371ab195f4bd97939ec696febfff3460d40c906"
+  integrity sha512-nZ6dl4AX5wDlYrcGIr8cnIRSJVNqfC5B0+6gbGCrH0dASfN5uLXkKront7TGj1VhUSW6RdP6Mc3GhdI0SpVpUA==
+  dependencies:
+    "@types/chart.js" "^2.9.29"
+    chart.js "^2.9.4"
+    core-js "^3.6.5"
+    prettier "^2.2.1"
+    vue "^3.0.0"
+
+vue@^3.0.0:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-3.0.6.tgz#2c16ed4bb66f16d6c6f6eaa3b7d5835a76598049"
+  integrity sha512-fgjbe/+f1EsqG7ZbaFSnxdzQXF2DKoFCdJlPxZZJy9XMtyXS6SY8pGzLi8WYb4zmsPLHvTZz4bHW30kFDk7vfA==
+  dependencies:
+    "@vue/compiler-dom" "3.0.6"
+    "@vue/runtime-dom" "3.0.6"
+    "@vue/shared" "3.0.6"
 
 vue@^3.0.0-rc.10, vue@^3.0.3:
   version "3.0.4"

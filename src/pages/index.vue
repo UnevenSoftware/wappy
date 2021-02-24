@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, watch } from 'vue'
+
 import useStats from '/@/composable/useStats'
 
 export default defineComponent({
