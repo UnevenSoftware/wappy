@@ -1,9 +1,11 @@
 import { ref, Ref } from 'vue'
 import { useWebWorkerFn } from '@vueuse/core'
 
+
 interface Stats {
   count: number
   users: UserStats[]
+  hours: { [hour: string]: number }
 }
 
 interface UserStats {
@@ -32,6 +34,13 @@ const heavyStats = async (file: File): Promise<Stats> => {
       reader.readAsText(file)
     })
   }
+
+  const normalizeTime = (time: string): string => {
+
+    const i = time.indexOf(':') + 1
+    const minutes = parseInt(time.substr(i, 2)) >= 30 ? '30' : '00'
+    return time.substr(0, i) + minutes + time.substr(i + 2)
+  }
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
 
@@ -43,6 +52,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
   const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
   const matches = [...content.matchAll(re)];
   const messagesCount: { [username: string]: number } = {}
+  const hours: { [hour: string]: number } = {}
 
   for (const match of matches) {
 
@@ -50,9 +60,13 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
     //  message counter
     messagesCount[username] = (messagesCount[username] ?? 0) + 1
+    // - hours distribuiton
+    const t = normalizeTime(time)
+    hours[t] = (hours[t] ?? 0) + 1
+
 
     // - top 10 words/emoji per person
-    // - hours distribuiton
+
     // - media over messages (%)
     // - response time per person (?)
   }
@@ -67,7 +81,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   return {
     count: matches.length,
-    users
+    users, hours
   }
 }
 
