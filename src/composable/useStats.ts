@@ -2,21 +2,15 @@ import { ref, Ref } from 'vue'
 import { useWebWorkerFn } from '@vueuse/core'
 
 interface Stats {
-  count?: number,
-  usersStats?: Map<string, UserStats>,
+  count: number
+  users: UserStats[]
 }
 
 interface UserStats {
-  user: string,
-  messages: string[],
-  messagesCount?: number
+  username: string
+  messagesCount: number
 }
 
-interface Message {
-  user?: string,
-  datetime?: string,
-  message?: string
-}
 
 interface IUseStats {
   readFile: (file: File) => Promise<void>
@@ -40,7 +34,6 @@ const heavyStats = async (file: File): Promise<Stats> => {
   }
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
-  const stats: Stats = {}
 
   // date: (\d{1,2}\/\d{1,2}\/\d{2,4})
   // time: (.*?)
@@ -49,29 +42,33 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
   const matches = [...content.matchAll(re)];
+  const messagesCount: { [username: string]: number } = {}
 
-  stats.count = matches.length;
-  stats.usersStats = new Map();
   for (const match of matches) {
-    //const [matches] = [...line.matchAll(re)]; // todo: could 
-    const msg: Message = {};
-    const [_, date, time, user, message] = match;
-    msg.datetime = `${date} ${time}`;
-    msg.user = user;
-    msg.message = message;
 
-    if (stats.usersStats?.has(msg.user)) {
-      stats.usersStats?.get(msg.user)?.messages.push(msg.message)
-      //stats.users?.get(msg.user)?.messagesCount++;
-    } else {
-      const us: UserStats = { user: "", messages: [] };
-      us.user = msg.user;
-      us.messages.push(message);
-      stats.usersStats?.set(msg.user, us);
-    }
+    const [_, date, time, username, message] = match;
+
+    //  message counter
+    messagesCount[username] = (messagesCount[username] ?? 0) + 1
+
+    // - top 10 words/emoji per person
+    // - hours distribuiton
+    // - media over messages (%)
+    // - response time per person (?)
   }
-  // console.log(stats)
-  return stats;
+
+  const users = Object.entries(messagesCount).map((entry) => {
+    const [username, messagesCount] = entry
+    return {
+      username,
+      messagesCount
+    }
+  })
+
+  return {
+    count: matches.length,
+    users
+  }
 }
 
 const { workerFn } = useWebWorkerFn(heavyStats, {})
