@@ -38,7 +38,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
   const normalizeTime = (time: string): string => {
 
     const i = time.indexOf(':') + 1
-    const minutes = parseInt(time.substr(i, 2)) >= 30 ? '30' : '00'
+    const minutes = '00'//parseInt(time.substr(i, 2)) >= 30 ? '30' : '00'
     return time.substr(0, i) + minutes + time.substr(i + 2)
   }
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
@@ -60,6 +60,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
     //  message counter
     messagesCount[username] = (messagesCount[username] ?? 0) + 1
+
     // - hours distribuiton
     const t = normalizeTime(time)
     hours[t] = (hours[t] ?? 0) + 1
