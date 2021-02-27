@@ -1,24 +1,19 @@
 import path from 'path'
-import { UserConfig } from 'vite'
 import Voie from 'vite-plugin-voie'
 import ViteComponents from 'vite-plugin-components'
-import PurgeIcons from 'vite-plugin-purge-icons'
+import vue from '@vitejs/plugin-vue'
 
-const alias = {
-  '/@/': path.resolve(__dirname, 'src')
-}
+import { defineConfig } from 'vite'
 
-const config: UserConfig = {
-  alias,
+export default defineConfig({
+  resolve: {
+    alias: {
+      '~/': `${path.resolve(__dirname, 'src')}/`,
+    },
+  },
   plugins: [
+    vue(),
     Voie(),
-    PurgeIcons(),
-    ViteComponents({
-      // currently, vite does not provide an API for plugins to get the config https://github.com/vitejs/vite/issues/738
-      // as the `alias` changes the behavior of middlewares, you have to pass it to ViteComponents to do the resolving
-      alias
-    }),
+    ViteComponents({}),
   ]
-}
-
-export default config
+})
