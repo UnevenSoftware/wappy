@@ -1,20 +1,17 @@
 <template>
   <div>
-    
     <div v-if="!loading" class="mt-16">
-      <label for="file-upload" class="
-          shadow-lg rounded-md px-6 py-4 
-          uppercase text-xl cursor-pointer
-          border-2
-          border-wateal font-semibold
-          hover:bg-watealdark">
-          {{!stats ? 'Upload your file' : 'Upload another file'}}
+      <label
+        for="file-upload"
+        class="shadow-lg rounded-md px-6 py-4 uppercase text-xl cursor-pointer border-2 border-wateal font-semibold hover:bg-watealdark"
+      >
+        {{ !stats ? 'Upload your file' : 'Upload another file' }}
       </label>
       <input id="file-upload" type="file" @change="fileSelected" accept=".txt" />
     </div>
-    <div v-if="!stats && loading" class="flex p-8 rounded-md border-2 border-wablue ">
-      <Icon icon="mdi:loading" class="m-6 animate-spin text-5xl h-12 w-12 "/>  
-      <span class="my-auto text-2xl italic font-light cursor-text ">Elaborating your file! </span>
+    <div v-if="!stats && loading" class="flex p-8 rounded-md border-2 border-wablue">
+      <i-mdi-loading class="m-6 animate-spin text-5xl h-12 w-12" />
+      <span class="my-auto text-2xl italic font-light cursor-text">Elaborating your file! </span>
     </div>
     <stats v-if="stats && !loading" :stats="stats"> </stats>
   </div>

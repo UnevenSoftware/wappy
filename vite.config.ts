@@ -2,6 +2,7 @@ import path from 'path'
 import Voie from 'vite-plugin-voie'
 import ViteComponents from 'vite-plugin-components'
 import vue from '@vitejs/plugin-vue'
+import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 
 import { defineConfig } from 'vite'
 
@@ -14,6 +15,9 @@ export default defineConfig({
   plugins: [
     vue(),
     Voie(),
-    ViteComponents({}),
+    ViteComponents({
+      customComponentResolvers: ViteIconsResolver(),
+    }),
+    ViteIcons()
   ]
 })

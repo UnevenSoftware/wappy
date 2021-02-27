@@ -2,7 +2,8 @@
   <nav class="p-4 flex">
     <h1 class="text-xl">WhatsApp Analyzer</h1>
     <div class="icon-btn ml-auto" @click="isDark = !isDark">
-      <Icon :icon="isDark ? 'carbon:moon' : 'carbon:sun'" class="inline-block" />
+      <i-carbon-moon v-if="isDark"></i-carbon-moon>
+      <i-carbon-sun v-else></i-carbon-sun>
     </div>
   </nav>
 </template>
