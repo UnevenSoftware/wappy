@@ -1,12 +1,37 @@
 <template>
-  <div class="p-4">
-    <label>Total number of messages: {{ stats.count }}</label>
-    <div v-if="stats.users">
-      <div v-for="(stat, i) in stats.users" :key="i">
-        <label>{{ stat.username }}: {{ stat.messagesCount }} messages</label>
+  <div class="space-y-8">
+    <div class="mt-28">
+      <span class="mt-12 mb-6 text-4xl">Total Stats: </span>
+      <div class="rounded-xl border-2 
+      border-walightgreen py-6 px-auto flex">
+        <Icon icon="jam:messages" class="m-6 text-5xl h-12 w-12 "/>  
+        <div class="my-auto">
+          <label class="font-normal">Total Messages: </label><br>
+          <span class="text-4xl font-bold tabular-nums oldstyle-nums">{{ stats.count }}</span>
+        </div>
+        <!--<bar-chart :chart-data="hoursData"></bar-chart>-->
       </div>
     </div>
-    <bar-chart :chart-data="hoursData"></bar-chart>
+
+    <div>
+      <span class="mt-12 mb-6 text-4xl font-semibold">User Stats:</span>
+      <div v-if="stats.users" class="grid grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2" >
+        <div v-for="(stat, i) in stats.users" :key="i" 
+          class="">
+          <div class="
+            py-2 px-4 rounded-md
+            border-2 border-wateal flex
+            ">
+            <Icon icon="mdi:face-man-profile" class="mx-6 my-4 text-5xl h-12 w-12 "/>  
+            <div class="my-auto">
+              <label class="font-bold text-2xl">{{ stat.username }} </label><br>
+              <span class="text-4xl font-bold tabular-nums oldstyle-nums">{{ stat.messagesCount }} </span>
+              <span class="text-xl">  messages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

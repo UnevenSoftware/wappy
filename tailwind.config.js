@@ -1,9 +1,31 @@
+const { colors: defaultColors } = require('tailwindcss/defaultTheme')
+
+const colors = { 
+    ...defaultColors,
+    ...{ // concat custom colors to default ones
+        transparent: 'transparent',
+        watealdark: '#075E54',
+        wateal: '#128C7E',
+        walightgreen: '#25D366',
+        wablue: '#34B7F1'
+    },
+}
+
+
+
 module.exports = {
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     content: ['./index.html', './src/**/*.vue', './src/**/*.js', './src/**/*.ts']
   },
-  theme: {},
+  theme: {
+    colors: colors,
+    extend: {
+      fontFamily: {
+        'sans': ['montserrat ', 'Roboto', 'sans-serif']
+      }
+    },
+  },
   variants: {
     cursor: ['responsive', 'disabled'],
     backgroundColor: ['dark', 'hover', 'disabled'],
