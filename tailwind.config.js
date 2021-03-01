@@ -23,6 +23,9 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['montserrat ', 'Roboto', 'sans-serif']
+      },
+      scale: {
+        '-1': '-1'
       }
     },
   },
