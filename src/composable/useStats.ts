@@ -100,7 +100,6 @@ const useStats = (mock?: Stats): IUseStats => {
     loading.value = true
     try {
       stats.value = await workerFn(file);
-      console.log(stats.value)
     } catch (e) {
       console.error(e)
       error.value = e

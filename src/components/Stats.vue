@@ -8,8 +8,8 @@
           <label class="font-normal">Total Messages: </label><br />
           <span class="text-4xl font-bold tabular-nums oldstyle-nums">{{ stats.count }}</span>
         </div>
-        <!-- <bar-chart :chart-data="hoursData"></bar-chart> -->
       </div>
+      <bar-chart class="mt-2" :hours="stats.hours"></bar-chart>
     </div>
 
     <div>
@@ -40,19 +40,19 @@ export default defineComponent({
     }
   },
   computed: {
-    hoursData() {
-      const hours = this.stats.hours
-      return {
-        labels: Object.keys(hours),
-        datasets: [
-          {
-            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            label: '# Messages',
-            data: Object.values(hours)
-          }
-        ]
-      }
-    }
+    // hoursData(): any {
+    //   const hours = this.stats.hours
+    //   return {
+    //     labels: Object.keys(hours),
+    //     datasets: [
+    //       {
+    //         backgroundColor: 'rgba(255, 99, 132, 0.6)',
+    //         label: '# Messages',
+    //         data: Object.values(hours)
+    //       }
+    //     ]
+    //   }
+    // }
   }
 })
 </script>

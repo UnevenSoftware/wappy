@@ -21,11 +21,11 @@ export default defineComponent({
   setup() {
     const { stats, readFile, loading } = useStats()
 
-    watch(stats, (v) => console.log('stats', v))
+    // watch(stats, (v) => console.log('stats', v))
 
     const fileSelected = (f: any) => {
-      console.log("fileSelected: ", f)
-      const file = f;
+      console.log('fileSelected: ', f)
+      const file = f
       if (file) {
         readFile(file)
       }

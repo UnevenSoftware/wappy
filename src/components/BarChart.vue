@@ -1,29 +1,38 @@
-
+<template>
+  <apexchart width="400" type="bar" :options="chartOptions" :series="series"></apexchart>
+</template>
 <script lang="ts">
+import ApexCharts from 'vue3-apexcharts'
 import { defineComponent } from 'vue'
-import { Bar } from 'vue3-chart-v2'
 
 export default defineComponent({
-  name: 'SportChart',
-  extends: Bar,
+  components: { apexchart: ApexCharts },
+  name: 'MessagesChart',
   props: {
-    chartData: {
+    hours: {
       type: Object,
       required: true
     }
   },
-  data() {
-    return {
-      state: {
-        chartData: {},
-        chartOptions: {
-          responsive: false
+  computed: {
+    series(): any {
+      return [
+        {
+          name: 'series-1',
+          data: Object.values(this.hours)
+        }
+      ]
+    },
+    chartOptions(): any {
+      return {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: Object.keys(this.hours ?? {})
         }
       }
     }
-  },
-  mounted() {
-    this.renderChart(this.chartData, this.state.chartOptions)
   }
 })
 </script>
