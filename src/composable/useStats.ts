@@ -35,11 +35,11 @@ const heavyStats = async (file: File): Promise<Stats> => {
     })
   }
 
-  const normalizeTime = (time: string): string => {
-
-    const i = time.indexOf(':') + 1
-    const minutes = '00'//parseInt(time.substr(i, 2)) >= 30 ? '30' : '00'
-    return time.substr(0, i) + minutes + time.substr(i + 2)
+  const normalizeTime = (time: string): number => {
+    const t = time.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+    if (t)
+      return parseInt(t[1]) + (t[3] ? 12 : 0)
+    return NaN
   }
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
@@ -52,7 +52,10 @@ const heavyStats = async (file: File): Promise<Stats> => {
   const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
   const matches = [...content.matchAll(re)];
   const messagesCount: { [username: string]: number } = {}
-  const hours: { [hour: string]: number } = {}
+
+  // generates map like  {0:0, 1:0, ..., 23: 0}
+  const hours: { [hour: number]: number } = Array.from<number>({ length: 24 }).reduce((map, value, i) => ({ ...map, [i]: 0 }), {})
+
 
   for (const match of matches) {
 
@@ -63,7 +66,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
     // - hours distribuiton
     const t = normalizeTime(time)
-    hours[t] = (hours[t] ?? 0) + 1
+    hours[t]++
 
 
     // - top 10 words/emoji per person
