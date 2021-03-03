@@ -55,7 +55,6 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   // generates map like  {0:0, 1:0, ..., 23: 0}
   const hours: { [hour: number]: number } = Array.from<number>({ length: 24 }).reduce((map, value, i) => ({ ...map, [i]: 0 }), {})
-  console.log(hours)
 
 
   for (const match of matches) {
