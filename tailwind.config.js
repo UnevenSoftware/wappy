@@ -57,7 +57,12 @@ module.exports = {
       },
       scale: {
         '-1': '-1'
+      },
+      backgroundImage: {
+        'dark-pattern': "url('./public/bg-dark.png')",
+        'light-pattern': "url('./public/bg-light.png')"
       }
+
     },
   },
   variants: {

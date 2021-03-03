@@ -1,5 +1,8 @@
 <template>
-  <nav class="p-4 flex font-semibold dark:text-primarylight text-primarydarker">
+
+  <nav class="container mx-auto rounded-b-md p-4 flex font-semibold 
+    dark:bg-dark-bglayer-2 dark:text-primarylight
+    bg-light-bglayer-2 text-primarydarker">
     <span class="px-4 inline-block align-middle text-xl ">WhatsApp Analyzer</span>
     <div class="p-2 box-content icon-btn ml-auto rounded-full dark:hover:bg-dark-bglayer-1 hover:bg-light-bglayer-2" 
       @click="isDark = !isDark">
