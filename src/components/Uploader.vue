@@ -1,35 +1,43 @@
 <template>
   <div @dragover.prevent @drop.prevent @drop="handleFileDrop"
     class="border-2 border-dashed rounded-xl
-    shadow-lg  font-semibold uppercase text-xl
-    dark:bg-gray-900 dark:border-wablue
-    bg-gray-200 border-wablue
-    hover:bg-gray-300">
-    <div class="rounded-xl p-8 cursor-pointer dark:hover:bg-gray-800
+    shadow-lg font-semibold text-md
+    dark:bg-dark-bglayer-1 dark:hover:bg-dark-bglayer-2 
+    dark:text-dark-label dark:border-primarydark  
+    bg-light-bglayer-2 hover:bg-light-bglayer-3
+    border-primarylight text-light-label">
+    <div class="rounded-xl p-8 cursor-pointer 
       text-center items-center" @click="inputClick">
 
       <div v-if="!loading">
         <div class="transform -scale-x-1">
-              <i-ant-design-paper-clip-outlined class="text-6xl block mx-auto" />
+              <i-ant-design-paper-clip-outlined class="text-6xl block mx-auto
+                dark:text-dark-icon
+                text-light-icon" />
         </div>
-        <span class="">
-          {{'Click to Upload Or Drag a File!'}}
+        <span class="dark:text-dark-text
+          text-light-text">
+          Click to Upload Or Drag a File!
         </span>
         <input ref="fileInput" class="hidden" type="file" @change="handleFileInput" accept=".txt" />
       </div>
 
       <div v-else>
-        <div v-if="loading" class="animate-spin m-2 h-10 w-10 text-4xl block mx-auto">
-          <i-mdi-loading/>
+        <div v-if="loading" class="animate-spin m-2 h-10 w-10  block mx-auto">
+          <i-mdi-loading class="text-4xl
+                dark:text-dark-icon
+                text-light-icon" />
         </div>
-        <span class="my-auto text-2xl italic font-light cursor-text">
+        <span class="my-auto text-2xl italic font-light cursor-text
+          dark:text-dark-text
+          text-light-text">
           Elaborating your file!
         </span>
       </div>
 
     </div>
-    <div v-if="fileSelected" class="px-8 py-4 rounded-b-xl 
-      border-t-2 border-dashed border-wablue">
+    <div v-if="fileSelected" class="px-8 py-4 rounded-b-xl text-sm
+      border-t-2 border-dashed dark:border-primarydark border-primarylight">
       <span class="my-auto">{{fileSelected.name}} | {{Math.round(fileSelected.size / 1024) || '>1'}} KB</span>
     </div>
   </div>

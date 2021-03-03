@@ -1,7 +1,8 @@
 <template>
-  <nav class="p-4 flex">
-    <h1 class="text-xl">WhatsApp Analyzer</h1>
-    <div class="icon-btn ml-auto" @click="isDark = !isDark">
+  <nav class="p-4 flex font-semibold dark:text-primarylight text-primarydarker">
+    <span class="px-4 inline-block align-middle text-xl ">WhatsApp Analyzer</span>
+    <div class="p-2 box-content icon-btn ml-auto rounded-full dark:hover:bg-dark-bglayer-1 hover:bg-light-bglayer-2" 
+      @click="isDark = !isDark">
       <i-carbon-moon v-if="isDark"></i-carbon-moon>
       <i-carbon-sun v-else></i-carbon-sun>
     </div>

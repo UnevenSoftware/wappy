@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-700 dark:text-gray-200">
+  <div id="app" class="dark:bg-dark-bg bg-light-bg dark:text-dark-label text-light-text">
     <Header/>
     <router-view class="container mx-auto "/> 
   </div>
