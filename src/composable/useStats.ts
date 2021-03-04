@@ -36,7 +36,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
   }
 
   const normalizeTime = (time: string): number => {
-    const t = time.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+    const t = time.match(/(\d+)(?::(\d\d))?\s*([pP]?)/);
     if (t)
       return parseInt(t[1]) + (t[3] ? 12 : 0)
     return NaN

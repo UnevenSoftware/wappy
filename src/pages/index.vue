@@ -11,13 +11,10 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, watch } from 'vue'
-import Uploader from '~/components/Uploader.vue'
-
+import { defineComponent } from 'vue'
 import useStats from '~/composable/useStats'
 
 export default defineComponent({
-  components: { Uploader },
   setup() {
     const { stats, readFile, loading } = useStats()
 
