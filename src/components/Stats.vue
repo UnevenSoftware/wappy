@@ -1,23 +1,44 @@
 <template>
-  <div class="space-y-8">
+  <div class="space-y-8 dark:text-dark-text text-light-text">
     <div class="mt-12">
-      <span class="mt-12 mb-6 text-4xl font-semibold">Total Stats: </span>
-      <div class="rounded-lg p-6 shadow-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
+      <span class="mt-12 mb-6 text-4xl font-semibold ">Chat Stats </span>
+      <div class="rounded-lg p-6 shadow-lg space-y-10 dark:bg-dark-bglayer-2 bg-light-bglayer-2">
         <div class="flex">
           <i-jam-messages class="m-6 text-5xl h-12 w-12" />
           <div class="my-auto">
-            <label class="font-normal">Total Messages: </label><br />
+            <label class="text-lg font-bold">Chat Messages </label><br />
             <span class="text-4xl font-bold tabular-nums oldstyle-nums">{{ stats.count }}</span>
           </div>
         </div>
-        <span class="text-lg font-bold">Hours Distribution:</span>
-        <bar-chart class="mt-2" :hours="stats.hours"></bar-chart>
-        <div v-if="stats.users" class="grid mt-2 grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
-          <div v-for="(word, i) in stats.words" :key="i" class="">
-            <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
-              <div class="my-auto">
-                <label class="font-bold text-xl text-primarylight">{{ word.count }} </label><br />
-                <span class="text-3xl font-bold">{{ word.word }} </span>
+        
+        <!-- Hours Distribution -->
+        <div>
+          <span class="text-lg font-bold">Hours Distribution</span>
+          <bar-chart class="mt-2" :hours="stats.hours"></bar-chart>
+        </div>
+        <!-- WORDS -->
+        <div>
+          <label class="mt-6 text-lg font-bold text">Most used words </label><br />
+          <div v-if="stats.users" class="grid mt-2 grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div v-for="(word, i) in stats.words" :key="i" class="">
+              <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
+                <div class="my-auto">
+                  <label class="font-bold text-xl text-primarylight">{{ word.count }} </label><br />
+                  <span class="text-3xl font-bold">{{ word.word }} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EMOJIS -->
+        <div>
+          <label class="mt-6 text-lg font-bold">Most used emojis </label><br />
+          <div v-if="stats.users" class="grid mt-2 grid-auto-flow grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
+            <div v-for="(emoji, i) in stats.emoji" :key="i" class="">
+              <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
+                  <label class="font-bold text-2xl my-auto text-primarylight">{{ emoji.count }} </label><br />
+                  <span class="text-3xl mx-auto my-auto font-bold">{{ emoji.word }} </span>
               </div>
             </div>
           </div>
@@ -26,7 +47,7 @@
     </div>
 
     <div>
-      <span class="mt-12 mb-6 text-4xl font-semibold">User Stats:</span>
+      <span class="mt-12 mb-6 text-4xl font-semibold">User Stats </span>
       <div v-if="stats.users" class="grid grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
         <div v-for="(stat, i) in stats.users" :key="i" class="">
           <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">

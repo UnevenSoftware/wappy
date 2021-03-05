@@ -9,8 +9,8 @@ const colors = {
         accent: '#34B7F1',
         dark: {
           label: '#ffffff',
-          text: '#9fa2a5',
-          icon: '#B1B3B5',
+          text: '#F3F4F6',
+          icon: '#E5E7EB',
           
           bg: '#131C21',
           'bglayer-1':'#1c2a31',
@@ -25,8 +25,8 @@ const colors = {
         },
         light: {
           label: '#0d0d0d',
-          text: '#747370',
-          icon: '#919191',
+          text: '#1F2937',
+          icon: '#374151',
 
           bg: '#dfd8d0',
           'bglayer-1': '#e5ddd5',

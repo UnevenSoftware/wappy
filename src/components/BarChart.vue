@@ -18,7 +18,8 @@ export default defineComponent({
         datasets: [
           {
             label: '# of Messages',
-            backgroundColor: '#34B7F1',
+            height: 560,
+            backgroundColor: '#25D366',
             data: Object.values(this.hours)
           }
         ]

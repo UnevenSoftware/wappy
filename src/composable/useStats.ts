@@ -7,6 +7,7 @@ interface Stats {
   users: UserStats[]
   hours: { [hour: string]: number }
   words: { word: string, count: number }[]
+  emoji: { word: string, count: number }[]
 }
 
 interface UserStats {
@@ -139,7 +140,8 @@ const heavyStats = async (file: File): Promise<Stats> => {
   return {
     count: matches.length,
     users, hours,
-    words: [...words, ...emoji]
+    words: words,
+    emoji: emoji
   }
 }
 
