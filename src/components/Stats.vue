@@ -12,6 +12,16 @@
         </div>
         <span class="text-lg font-bold">Hours Distribution:</span>
         <bar-chart class="mt-2" :hours="stats.hours"></bar-chart>
+        <div v-if="stats.users" class="grid mt-2 grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div v-for="(word, i) in stats.words" :key="i" class="">
+            <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
+              <div class="my-auto">
+                <label class="font-bold text-xl text-primarylight">{{ word.count }} </label><br />
+                <span class="text-3xl font-bold">{{ word.word }} </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -22,10 +32,9 @@
           <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
             <div class="my-auto">
               <label class="font-bold text-xl text-primarylight">{{ stat.username }} </label><br />
-              <span class="text-3xl font-bold ">{{ stat.messagesCount }} </span>
-               <span class="text-lg"> / {{getPercentage(stats.count ,stat.messagesCount)}}%</span>
+              <span class="text-3xl font-bold">{{ stat.messagesCount }} </span>
+              <span class="text-lg"> / {{ getPercentage(stats.count, stat.messagesCount) }}%</span>
               <span class="text-xl"> messages.</span>
-              
             </div>
           </div>
         </div>
@@ -43,9 +52,9 @@ export default defineComponent({
       required: true
     }
   },
-  setup(){
-    const getPercentage = function(max:number, value: number){
-      return ((value/max) * 100).toFixed(2);
+  setup() {
+    const getPercentage = function (max: number, value: number) {
+      return ((value / max) * 100).toFixed(2)
     }
     return { getPercentage }
   }
