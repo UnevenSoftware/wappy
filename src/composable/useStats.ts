@@ -77,14 +77,21 @@ const heavyStats = async (file: File): Promise<Stats> => {
   const hours: { [hour: number]: number } = Array.from<number>({ length: 24 }).reduce((map, value, i) => ({ ...map, [i]: 0 }), {})
 
   const wordsCount: { [work: string]: number } = {}
+  const emojiCount: { [work: string]: number } = {}
   const stopWords = await loadStopWords()
 
   const countWords = (message: string) => {
     if (message.match(/<Media\s(.*?)>/gm)) return void 0
 
     const words = message.split(' ').filter(w => w.length > 2)
+
+    const emojis = message.match(/\p{Emoji_Presentation}/gu);
+    emojis?.forEach((w) => {
+      emojiCount[w] = (emojiCount[w] ?? 0) + 1
+    })
+
     words.forEach((w) => {
-      if (stopWords.includes(w.toLowerCase())) return void 0
+      if (stopWords.includes(w.toLowerCase()) || w.match(/\p{Emoji_Presentation}/gu)) return void 0
       wordsCount[w] = (wordsCount[w] ?? 0) + 1
     })
   }
@@ -125,17 +132,19 @@ const heavyStats = async (file: File): Promise<Stats> => {
   })
 
   const words = Object.entries(wordsCount).sort(([wa, a], [wb, b]) => b - a).slice(0, 10).map(([word, count]) => ({ word, count }))
+  const emoji = Object.entries(emojiCount).sort(([wa, a], [wb, b]) => b - a).slice(0, 10).map(([word, count]) => ({ word, count }))
 
   console.log(words)
 
   return {
     count: matches.length,
     users, hours,
-    words
+    words: [...words, ...emoji]
   }
 }
 
-const { workerFn } = useWebWorkerFn(heavyStats, {})
+// { dependencies: [`${location.origin}/stats.js`] }
+const { workerFn } = useWebWorkerFn(heavyStats,)
 
 const useStats = (mock?: Stats): IUseStats => {
 
