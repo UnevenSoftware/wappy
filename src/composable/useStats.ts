@@ -13,7 +13,6 @@ interface UserStats {
   messagesCount: number
 }
 
-
 interface IUseStats {
   readFile: (file: File) => Promise<void>
   loading: Ref<boolean>
@@ -64,13 +63,11 @@ const heavyStats = async (file: File): Promise<Stats> => {
     //  message counter
     messagesCount[username] = (messagesCount[username] ?? 0) + 1
 
-    // - hours distribuiton
+    // - hours distribution
     const t = normalizeTime(time)
     hours[t]++
 
-
     // - top 10 words/emoji per person
-
     // - media over messages (%)
     // - response time per person (?)
   }
