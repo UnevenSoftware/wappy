@@ -1,5 +1,6 @@
 import { ref, Ref } from 'vue'
 import { useWebWorkerFn } from '@vueuse/core'
+import { defineConfig } from 'vite'
 
 
 interface Stats {
@@ -14,6 +15,7 @@ interface UserStats {
   username: string
   messagesCount: number
   mediaCount: number
+  responeTime?: number
 }
 
 interface IUseStats {
@@ -51,6 +53,12 @@ const heavyStats = async (file: File): Promise<Stats> => {
       return parseInt(t[1]) + (t[3] ? 12 : 0)
     return NaN
   }
+
+  // responeTime Utils
+  const rangeBetweenDates = (startDate: Date, stopDate:Date) => {
+    return ((stopDate.getTime() - startDate.getTime()) / 1000)
+  }
+
 
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
@@ -97,7 +105,9 @@ const heavyStats = async (file: File): Promise<Stats> => {
     })
   }
 
-
+  const diffs: [{username: string, diff: number[]}] = [];
+  const prevDiff: {username:string, datetime: Date} = {};
+  
   for (const match of matches) {
 
     const [_, date, time, username, message] = match;
@@ -109,7 +119,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
       incrementCounter(username, 'text')
     }
 
-    // - hours distribution
+    // [DONE] - hours distribution
     const t = normalizeTime(time)
     hours[t]++
 
@@ -118,7 +128,21 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
     // - top 10 words/emoji per person
     // - media over messages (%)
-    // - response time per person (?)
+    // [WIP] - response time per person (?)
+    if(!prevDiff.username && prevDiff.username != username){
+      const userdiff = diffs.find(el => el.username === username)
+      if(userdiff){
+        diffs.find(el => el.username === username)
+          ?.diff.push(rangeBetweenDates(new Date(date + time), new Date(prevDiff.datetime)))
+
+      } else {
+        diffs.push({username: username, 
+          diff: [rangeBetweenDates(new Date(date + time), new Date(prevDiff.datetime))]})
+
+      }
+    }
+    prevDiff.username = username
+    prevDiff.datetime = new Date(date + time)
   }
 
   const users = Object.entries(userCounters).map((entry) => {
@@ -126,7 +150,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
     const { media, text } = counters
     return {
-      username,
+      username: username,
       messagesCount: text,
       mediaCount: media
     }
@@ -134,8 +158,6 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   const words = Object.entries(wordsCount).sort(([wa, a], [wb, b]) => b - a).slice(0, 10).map(([word, count]) => ({ word, count }))
   const emoji = Object.entries(emojiCount).sort(([wa, a], [wb, b]) => b - a).slice(0, 10).map(([word, count]) => ({ word, count }))
-
-  console.log(words)
 
   return {
     count: matches.length,

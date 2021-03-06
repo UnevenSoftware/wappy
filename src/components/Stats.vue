@@ -52,10 +52,19 @@
         <div v-for="(stat, i) in stats.users" :key="i" class="">
           <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
             <div class="my-auto">
-              <label class="font-bold text-xl text-primarylight">{{ stat.username }} </label><br />
-              <span class="text-3xl font-bold">{{ stat.messagesCount }} </span>
-              <span class="text-lg"> / {{ getPercentage(stats.count, stat.messagesCount) }}%</span>
-              <span class="text-xl"> messages.</span>
+              
+              <label class="font-bold text-xl text-accent">{{ stat.username }} </label><br />
+              <div class="grid grid-auto-flow grid-cols-2 gap-2">
+                <div>
+                  <span class="text-3xl font-bold mx-auto text-primarylight">{{ stat.messagesCount }} </span><br>
+                  <span class="text-lg mx-auto"> ➔ <span class="text-accent">{{getPercentage(stats.count, stat.messagesCount)}}%</span> of total messages.</span>
+                </div>
+                <div>
+                  <span class="text-3xl font-bold mx-auto text-primarylight"> {{stat.mediaCount}}</span><br>
+                  <span class="text-lg "> ➔ <span class="text-accent">{{getPercentage(stat.messagesCount, stat.mediaCount)}}%</span> of your messages are shared Medias.</span>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
