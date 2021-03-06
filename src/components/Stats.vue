@@ -53,7 +53,7 @@
           <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
             <div class="my-auto">
               
-              <label class="font-bold text-xl text-accent">{{ stat.username }} </label><br />
+              <label class="font-bold text-xl" :style="`color: ${stringToHSL(stat.username)};`">{{ stat.username }} </label><br />
               <div class="grid grid-auto-flow grid-cols-2 gap-2">
                 <div>
                   <span class="text-3xl font-bold mx-auto text-primarylight">{{ stat.messagesCount }} </span><br>
@@ -75,6 +75,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { isDark } from '~/utils'
+
 export default defineComponent({
   props: {
     stats: {
@@ -86,7 +88,21 @@ export default defineComponent({
     const getPercentage = function (max: number, value: number) {
       return ((value / max) * 100).toFixed(2)
     }
-    return { getPercentage }
+    
+    const stringToHSL = function(str: string){
+      let hash = 0;
+      if (str.length === 0) return hash;
+      for (let i = 0; i < str.length; i++) {
+          hash = str.charCodeAt(i) + ((hash << 5) - hash);
+          hash = hash & hash;
+      }
+    	return `hsl(${hash % 360}, 100%, 
+          ${isDark.value 
+            ? 50 + Math.random()*50 
+            : 25 + Math.random()*35 }%)`;
+    }
+
+    return { getPercentage, stringToHSL }
   }
 })
 </script>

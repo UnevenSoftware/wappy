@@ -1,8 +1,8 @@
 <template>
-  <div id="app" class="dark:bg-dark-bg bg-light-bg min-w-screen min-h-screen dark:text-dark-text" 
+  <div id="app" class="dark:bg-dark-bg bg-light-bg dark:text-dark-text text-light-text max-w-screen overflow-hidden" 
     :style="getBgPattern()">
     <Header/>
-    <router-view class="container  my-8 mx-auto min-h-screen max-w-screen overflow-hidden"/> 
+    <router-view class="container  my-8 mx-auto min-h-screen "/> 
     <Footer/>
   </div>
 </template>
