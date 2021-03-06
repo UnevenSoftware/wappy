@@ -64,7 +64,7 @@
                   <span class="text-lg "> ➔ <span class="text-accent">{{getPercentage(stat.messagesCount, stat.mediaCount)}}%</span> of your messages are shared Medias.</span>
                 </div>
               </div>
-
+<span class="text-lg "> ➔ <span class="text-accent">{{stat.responseTime}} seconds: </span> Medium Response time.</span>
             </div>
           </div>
         </div>

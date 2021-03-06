@@ -15,7 +15,7 @@ interface UserStats {
   username: string
   messagesCount: number
   mediaCount: number
-  responeTime?: number
+  responseTime?: number
 }
 
 interface IUseStats {
@@ -85,8 +85,8 @@ const heavyStats = async (file: File): Promise<Stats> => {
   // generates map like  {0:0, 1:0, ..., 23: 0}
   const hours: { [hour: number]: number } = Array.from<number>({ length: 24 }).reduce((map, value, i) => ({ ...map, [i]: 0 }), {})
 
-  const wordsCount: { [work: string]: number } = {}
-  const emojiCount: { [work: string]: number } = {}
+  const wordsCount: { [word: string]: number } = {}
+  const emojiCount: { [word: string]: number } = {}
   const stopWords = await loadStopWords()
 
   const countWords = (message: string) => {
@@ -101,13 +101,12 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
     words.forEach((w) => {
       if (stopWords.includes(w.toLowerCase()) || w.match(/\p{Emoji_Presentation}/gu)) return void 0
-      wordsCount[w] = (wordsCount[w] ?? 0) + 1
+      wordsCount[w.toLowerCase()] = (wordsCount[w.toLowerCase()] ?? 0) + 1
     })
   }
 
-  const diffs: [{username: string, diff: number[]}] = [];
   const prevDiff: {username:string, datetime: Date} = {};
-  
+  let firstRun = true;
   for (const match of matches) {
 
     const [_, date, time, username, message] = match;
@@ -129,30 +128,26 @@ const heavyStats = async (file: File): Promise<Stats> => {
     // - top 10 words/emoji per person
     // - media over messages (%)
     // [WIP] - response time per person (?)
-    if(!prevDiff.username && prevDiff.username != username){
-      const userdiff = diffs.find(el => el.username === username)
-      if(userdiff){
-        diffs.find(el => el.username === username)
-          ?.diff.push(rangeBetweenDates(new Date(date + time), new Date(prevDiff.datetime)))
-
-      } else {
-        diffs.push({username: username, 
-          diff: [rangeBetweenDates(new Date(date + time), new Date(prevDiff.datetime))]})
-
+    if(!firstRun && prevDiff.username.toLowerCase() != username.toLowerCase()){
+      const responseTime = rangeBetweenDates(new Date(prevDiff.datetime), new Date([date, time].join(' '))); // returns range in seconds
+      if(responseTime <= 14400){ // 14400 seconds in 4 hour // filtering out responses after 4 hour
+        incrementCounter(username, 'gloabalResponseTime', responseTime)
+        incrementCounter(username, 'numberOfResponses');
       }
-    }
+    } else if(firstRun) firstRun = false;
+    
     prevDiff.username = username
-    prevDiff.datetime = new Date(date + time)
+    prevDiff.datetime = new Date([date, time].join(' '))
   }
 
   const users = Object.entries(userCounters).map((entry) => {
     const [username, counters] = entry
-
-    const { media, text } = counters
+    const { media, text, gloabalResponseTime, numberOfResponses } = counters
     return {
       username: username,
       messagesCount: text,
-      mediaCount: media
+      mediaCount: media,
+      responseTime: (gloabalResponseTime / numberOfResponses).toFixed()
     }
   })
 
