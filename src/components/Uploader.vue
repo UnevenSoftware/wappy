@@ -1,6 +1,6 @@
 <template>
   <div @dragover.prevent @drop.prevent @drop="handleFileDrop"
-    class="border-2 border-dashed rounded-xl
+    class=" rounded-xl
     shadow-lg font-semibold text-md
     dark:bg-dark-bglayer-1 dark:hover:bg-dark-bglayer-2 
     dark:text-dark-label dark:border-primarydark  

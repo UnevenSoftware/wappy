@@ -3,22 +3,31 @@
     <div class="mt-12">
       <span class="mt-12 mb-6 text-4xl font-semibold ">Chat Stats </span>
       <div class="rounded-lg p-6 shadow-lg space-y-10 dark:bg-dark-bglayer-2 bg-light-bglayer-2">
-        <div class="flex">
-          <i-jam-messages class="m-6 text-5xl h-12 w-12" />
-          <div class="my-auto">
-            <label class="text-lg font-bold">Chat Messages </label><br />
-            <span class="text-4xl font-bold tabular-nums oldstyle-nums">{{ stats.count }}</span>
+        <div class="grid-auto-flow md:grid-cols-2">
+          <div class=" my-auto text-center grid grid-cols-2 gap-2">
+            <div class="rounded-md p-6 shadow-lg text-2xl dark:bg-dark-bglayer-3 bg-light-bglayer-3 ">
+              <span class="mx-auto text-5xl font-bold tabular-nums oldstyle-nums text-primarylight">
+                {{ stats.messages }}</span>
+              <br/>
+              <span class="mx-auto font-bold tabular-nums oldstyle-nums ">Total Messages</span>
+            </div>
+            <div class="rounded-md p-6 shadow-lg text-2xl dark:bg-dark-bglayer-3 bg-light-bglayer-3">
+              <span class="mx-auto text-5xl font-bold tabular-nums oldstyle-nums text-primarylight">
+                {{ stats.medias }}</span>
+              <br/>
+              <span class="mx-auto font-bold tabular-nums oldstyle-nums ">Total Medias</span>
+            </div>
           </div>
         </div>
         
         <!-- Hours Distribution -->
         <div>
-          <span class="text-lg font-bold">Hours Distribution</span>
+          <span class="text-2xl font-bold">Hours Distribution</span>
           <bar-chart class="mt-2" :hours="stats.hours"></bar-chart>
         </div>
         <!-- WORDS -->
         <div>
-          <label class="mt-6 text-lg font-bold text">Most used words </label><br />
+          <label class="mt-6 text-2xl font-bold text">Most used words </label><br />
           <div v-if="stats.users" class="grid mt-2 grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
             <div v-for="(word, i) in stats.words" :key="i" class="">
               <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
@@ -33,7 +42,7 @@
 
         <!-- EMOJIS -->
         <div>
-          <label class="mt-6 text-lg font-bold">Most used emojis </label><br />
+          <label class="mt-6 text-2xl font-bold">Most used emojis </label><br />
           <div v-if="stats.users" class="grid mt-2 grid-auto-flow grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
             <div v-for="(emoji, i) in stats.emoji" :key="i" class="">
               <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
@@ -48,7 +57,8 @@
 
     <div>
       <span class="mt-12 mb-6 text-4xl font-semibold">User Stats </span>
-      <div v-if="stats.users" class="grid grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div v-if="stats.users" class="grid grid-auto-flow md:grid-cols-2 gap-2" 
+        :class="stats.users.lenght > 1 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'"> 
         <div v-for="(stat, i) in stats.users" :key="i" class="">
           <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
             <div class="my-auto">
@@ -64,7 +74,7 @@
                   <span class="text-lg "> ➔ <span class="text-accent">{{getPercentage(stat.messagesCount, stat.mediaCount)}}%</span> of your messages are shared Medias.</span>
                 </div>
               </div>
-<span class="text-lg "> ➔ <span class="text-accent">{{stat.responseTime}} seconds: </span> Medium Response time.</span>
+<span class="text-lg "> ➔ <span class="text-accent">{{formatTime(stat.responseTime)}}</span> Medium Response time.</span>
             </div>
           </div>
         </div>
@@ -102,7 +112,17 @@ export default defineComponent({
             : 25 + Math.random()*35 }%)`;
     }
 
-    return { getPercentage, stringToHSL }
+    const formatTime = (s: number)=>{
+      let hours   = Math.floor(s / 3600);
+      let minutes = Math.floor((s - (hours * 3600)) / 60);
+      let seconds = s - (hours * 3600) - (minutes * 60);
+      
+      return (((hours < 10) ? "0" + hours : hours) + ':' + 
+        ((minutes < 10) ? "0" + minutes : minutes) + ':' + 
+        ((seconds < 10) ? "0" + seconds : seconds));
+    }
+
+    return { getPercentage, stringToHSL, formatTime }
   }
 })
 </script>

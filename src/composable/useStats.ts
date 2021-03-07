@@ -2,9 +2,10 @@ import { ref, Ref } from 'vue'
 import { useWebWorkerFn } from '@vueuse/core'
 import { defineConfig } from 'vite'
 
-
 interface Stats {
   count: number
+  messages: number
+  medias: number
   users: UserStats[]
   hours: { [hour: string]: number }
   words: { word: string, count: number }[]
@@ -156,7 +157,10 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   return {
     count: matches.length,
-    users, hours,
+    messages: users.reduce((amount, el) => amount + (el.messagesCount || 0), 0),
+    medias: users.reduce((amount, el) => amount + (el.mediaCount || 0), 0),
+    users: users, 
+    hours: hours,
     words: words,
     emoji: emoji
   }
