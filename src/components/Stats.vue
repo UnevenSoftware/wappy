@@ -1,5 +1,7 @@
 <template>
   <div class="space-y-8 dark:text-dark-text text-light-text">
+    
+    <!-- CHAT STATS -->
     <div class="mt-12">
       <span class="mt-12 mb-6 text-4xl font-semibold ">Chat Stats </span>
       <div class="rounded-lg p-6 shadow-lg space-y-10 dark:bg-dark-bglayer-2 bg-light-bglayer-2">
@@ -54,40 +56,29 @@
         </div>
       </div>
     </div>
-
+  
+    <!-- USER STATS -->
     <div>
       <span class="mt-12 mb-6 text-4xl font-semibold">User Stats </span>
       <div v-if="stats.users" class="grid grid-auto-flow md:grid-cols-2 gap-2" 
-        :class="stats.users.lenght > 1 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'"> 
-        <div v-for="(stat, i) in stats.users" :key="i" class="">
-          <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
-            <div class="my-auto">
-              
-              <label class="font-bold text-xl" :style="`color: ${stringToHSL(stat.username)};`">{{ stat.username }} </label><br />
-              <div class="grid grid-auto-flow grid-cols-2 gap-2">
-                <div>
-                  <span class="text-3xl font-bold mx-auto text-primarylight">{{ stat.messagesCount }} </span><br>
-                  <span class="text-lg mx-auto"> ➔ <span class="text-accent">{{getPercentage(stats.count, stat.messagesCount)}}%</span> of total messages.</span>
-                </div>
-                <div>
-                  <span class="text-3xl font-bold mx-auto text-primarylight"> {{stat.mediaCount}}</span><br>
-                  <span class="text-lg "> ➔ <span class="text-accent">{{getPercentage(stat.messagesCount, stat.mediaCount)}}%</span> of your messages are shared Medias.</span>
-                </div>
-              </div>
-<span class="text-lg "> ➔ <span class="text-accent">{{formatTime(stat.responseTime)}}</span> Medium Response time.</span>
-            </div>
-          </div>
-        </div>
+        :class="stats.users.length > 2  ? 'xl:grid-cols-3' : 'xl:grid-cols-2'"> 
+        <user-stats 
+          v-for="(userstats, i) in stats.users" :key="i" 
+          :globalstats="{count: stats.count }" :userstats="userstats">
+        </user-stats>
       </div>
     </div>
+
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { isDark } from '~/utils'
+import UserStats from './UserStats.vue'
 
 export default defineComponent({
+  components: { UserStats },
   props: {
     stats: {
       type: Object,
@@ -95,34 +86,7 @@ export default defineComponent({
     }
   },
   setup() {
-    const getPercentage = function (max: number, value: number) {
-      return ((value / max) * 100).toFixed(2)
-    }
-    
-    const stringToHSL = function(str: string){
-      let hash = 0;
-      if (str.length === 0) return hash;
-      for (let i = 0; i < str.length; i++) {
-          hash = str.charCodeAt(i) + ((hash << 5) - hash);
-          hash = hash & hash;
-      }
-    	return `hsl(${hash % 360}, 100%, 
-          ${isDark.value 
-            ? 50 + Math.random()*50 
-            : 25 + Math.random()*35 }%)`;
-    }
-
-    const formatTime = (s: number)=>{
-      let hours   = Math.floor(s / 3600);
-      let minutes = Math.floor((s - (hours * 3600)) / 60);
-      let seconds = s - (hours * 3600) - (minutes * 60);
-      
-      return (((hours < 10) ? "0" + hours : hours) + ':' + 
-        ((minutes < 10) ? "0" + minutes : minutes) + ':' + 
-        ((seconds < 10) ? "0" + seconds : seconds));
-    }
-
-    return { getPercentage, stringToHSL, formatTime }
+    return { }
   }
 })
 </script>

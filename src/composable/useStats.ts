@@ -106,8 +106,8 @@ const heavyStats = async (file: File): Promise<Stats> => {
     })
   }
 
-  const prevDiff: {username:string, datetime: Date} = {};
-  let firstRun = true;
+  const lastMessage: {username:string, datetime: Date} = {};
+  let firstCicle = true;
   for (const match of matches) {
 
     const [_, date, time, username, message] = match;
@@ -126,19 +126,19 @@ const heavyStats = async (file: File): Promise<Stats> => {
     // word counter
     countWords(message)
 
-    // - top 10 words/emoji per person
+    // - top 5 words/emoji per person
     // - media over messages (%)
-    // [WIP] - response time per person (?)
-    if(!firstRun && prevDiff.username.toLowerCase() != username.toLowerCase()){
-      const responseTime = rangeBetweenDates(new Date(prevDiff.datetime), new Date([date, time].join(' '))); // returns range in seconds
+    // [DONE] - response time per person (?)
+    if(!firstCicle && lastMessage.username.toLowerCase() != username.toLowerCase()){
+      const responseTime = rangeBetweenDates(new Date(lastMessage.datetime), new Date([date, time].join(' '))); // returns range in seconds
       if(responseTime <= 14400){ // 14400 seconds in 4 hour // filtering out responses after 4 hour
         incrementCounter(username, 'gloabalResponseTime', responseTime)
         incrementCounter(username, 'numberOfResponses');
       }
-    } else if(firstRun) firstRun = false;
+    } else if(firstCicle) firstCicle = false;
     
-    prevDiff.username = username
-    prevDiff.datetime = new Date([date, time].join(' '))
+    lastMessage.username = username
+    lastMessage.datetime = new Date([date, time].join(' '))
   }
 
   const users = Object.entries(userCounters).map((entry) => {

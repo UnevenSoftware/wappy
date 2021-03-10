@@ -23,8 +23,8 @@
       </div>
 
       <div v-else>
-        <div v-if="loading" class="animate-spin m-2 h-10 w-10  block mx-auto">
-          <i-mdi-loading class="text-4xl
+        <div v-if="loading" class="animate-spin m-2 text-4xl h-11 w-11  block mx-auto">
+          <i-mdi-loading class="
                 dark:text-dark-icon
                 text-light-icon" />
         </div>
