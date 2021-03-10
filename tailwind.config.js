@@ -21,7 +21,7 @@ const colors = {
           bgmessage_recevier: '#262D31',
           bgmessage_receiver_quote: '#20262A',
           bgmessage_sender: '#056162',
-          bgmesaage_sender_quote: '#065051',
+          bgmessage_sender_quote: '#065051',
         },
         light: {
           label: '#0d0d0d',
@@ -37,7 +37,7 @@ const colors = {
           bgmessage_recevier: '#ffffff',
           bgmessage_receiver_quote: '#F0F0F0',
           bgmessage_sender: '#DCF8C6',
-          bgmesaage_sender_quote: '#CFE9BA',
+          bgmessage_sender_quote: '#CFE9BA',
         }
     },
 }

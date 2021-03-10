@@ -40,5 +40,10 @@ const getPercentage = (max: number, value: number):string => {
   return ((value / max) * 100).toFixed(2)
 }
 
+const getProfileEmoji = (): any => {
+  const emoji = "😀😃😄😁😆😅😂🤣😊😇🙂🙃😉😌🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎🤩🥳😏😒😞😔😟😕😣😖😫😩🥺😢😭😤😠😳😱😨😰😥😓🤗🤔🤭🤫🤥😐😑😬🙄😯😧😮😲🥱😴🤤😪😵🤐🥴";
+  
+  return [...emoji][Math.floor(Math.random() * (emoji.length-1))];
+}
 
-export {stringToHSL, formatTime, getPercentage};
+export {stringToHSL, formatTime, getPercentage, getProfileEmoji};
