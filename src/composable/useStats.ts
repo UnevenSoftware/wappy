@@ -27,6 +27,8 @@ interface IUseStats {
   progress: Ref<number>
 }
 const heavyStats = async (file: File): Promise<Stats> => {
+
+
   const readFileAsync = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader()
@@ -58,6 +60,31 @@ const heavyStats = async (file: File): Promise<Stats> => {
   // responeTime Utils
   const rangeBetweenDates = (startDate: Date, stopDate: Date) => {
     return ((stopDate.getTime() - startDate.getTime()) / 1000)
+  }
+
+
+  const getThresold = (matches: RegExpMatchArray[]) => {
+    let i = 0
+
+    const MIN = (60 * 60 * 1), MAX = (60 * 60 * 7)
+    const diffs = []
+    const getDate = (index: number) => {
+      const [_, date, time] = matches[index];
+      return new Date(`${date} ${time}`)
+    }
+
+    while (i < matches.length - 2) {
+      const diff = rangeBetweenDates(getDate(i), getDate(i + 1))
+      if (diff > MIN && diff < MAX)
+        diffs.push(diff)
+      i++
+    }
+
+    const n = diffs.length
+    const mean = diffs.reduce((a, b) => a + b) / n
+
+    const standardDeviation = Math.sqrt(diffs.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
+    return mean//Math.max(standardDeviation, mean)
   }
 
 
@@ -107,6 +134,8 @@ const heavyStats = async (file: File): Promise<Stats> => {
   }
 
   let lastMessage: { username: string, datetime: Date } | undefined;
+  const THRESHOLD = getThresold(matches)
+  console.log('THRESHOLD', THRESHOLD / (60 * 60))
 
   for (const match of matches) {
 
@@ -129,13 +158,15 @@ const heavyStats = async (file: File): Promise<Stats> => {
     // - response time & started startedConversations per person 
 
     const datetime = new Date([date, time].join(' '))
-    const THRESHOLD = (60 * 60 * 2)
+    //(60 * 60 * 2)
 
     if (!lastMessage) {
       incrementCounter(username, 'startedConversations');
     } else {
       const differentPerson = lastMessage.username.toLowerCase() != username.toLowerCase()
       const diffTime = rangeBetweenDates(new Date(lastMessage.datetime), datetime)
+
+
 
       // count startConversations
       if (diffTime > THRESHOLD) {
@@ -155,7 +186,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   const users = Object.entries(userCounters).map((entry) => {
     const [username, counters] = entry
-    const { media, text, gloabalResponseTime, numberOfResponses, startedConversations } = counters
+    const { media, text, gloabalResponseTime, numberOfResponses, startedConversations = 0 } = counters
     return {
       username: username,
       messagesCount: text,
@@ -167,6 +198,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
   const words = Object.entries(wordsCount).sort(([wa, a], [wb, b]) => b - a).slice(0, 10).map(([word, count]) => ({ word, count }))
   const emoji = Object.entries(emojiCount).sort(([wa, a], [wb, b]) => b - a).slice(0, 10).map(([word, count]) => ({ word, count }))
+
 
   return {
     count: matches.length,

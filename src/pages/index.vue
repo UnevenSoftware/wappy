@@ -21,7 +21,6 @@ export default defineComponent({
     // watch(stats, (v) => console.log('stats', v))
 
     const fileSelected = (f: any) => {
-      console.log('fileSelected: ', f)
       const file = f
       if (file) {
         readFile(file)
