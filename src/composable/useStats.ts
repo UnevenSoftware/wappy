@@ -61,7 +61,6 @@ const heavyStats = async (file: File): Promise<Stats> => {
     return ((stopDate.getTime() - startDate.getTime()) / 1000)
   }
 
-<<<<<<< HEAD
 
   const getThresold = (matches: RegExpMatchArray[]) => {
     let i = 0
@@ -84,12 +83,10 @@ const heavyStats = async (file: File): Promise<Stats> => {
     const mean = diffs.reduce((a, b) => a + b) / n
 
     const standardDeviation = Math.sqrt(diffs.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
-    return mean//Math.max(standardDeviation, mean)
+    return standardDeviation || MIN
   }
 
 
-=======
->>>>>>> 8556d6262dba56a9325387f1201725bc94f3018a
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
 
@@ -133,12 +130,8 @@ const heavyStats = async (file: File): Promise<Stats> => {
   }
 
   let lastMessage: { username: string, datetime: Date } | undefined;
-<<<<<<< HEAD
   const THRESHOLD = getThresold(matches)
   console.log('THRESHOLD', THRESHOLD / (60 * 60))
-=======
-  const THRESHOLD = (60 * 60 * 4) // 2 hours
->>>>>>> 8556d6262dba56a9325387f1201725bc94f3018a
 
   for (const match of matches) {
     const [_, date, time, username, message] = match;
@@ -159,18 +152,12 @@ const heavyStats = async (file: File): Promise<Stats> => {
 
     // - response time & started startedConversations per person 
     const datetime = new Date([date, time].join(' '))
-<<<<<<< HEAD
-    //(60 * 60 * 2)
-=======
->>>>>>> 8556d6262dba56a9325387f1201725bc94f3018a
 
     if (!lastMessage) {
       incrementCounter(username, 'startedConversations');
     } else {
       const differentPerson = lastMessage.username.toLowerCase() != username.toLowerCase()
       const diffTime = rangeBetweenDates(new Date(lastMessage.datetime), datetime)
-
-
 
       // count startConversations
       if (diffTime > THRESHOLD) {
