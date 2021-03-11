@@ -31,13 +31,11 @@
         <div>
           <label class="mt-6 text-2xl font-bold text">Most used words </label><br />
           <div v-if="stats.users" class="grid mt-2 grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
-            <div v-for="(word, i) in stats.words" :key="i" class="">
-              <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
-                <div class="my-auto">
-                  <label class="font-bold text-xl text-primarylight">{{ word.count }} </label><br />
-                  <span class="text-3xl font-bold">{{ word.word }} </span>
-                </div>
-              </div>
+            <div v-for="(word, i) in stats.words" :key="i" 
+              class="px-2 py-4 rounded-md shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3 my-auto 
+                text-3xl font-bold flex">
+                <div class="ml-2 mr-8 text-primarylight my-auto">{{ word.count }}</div>
+                <div class="my-auto">{{ word.word }}</div>
             </div>
           </div>
         </div>
@@ -45,10 +43,12 @@
         <!-- EMOJIS -->
         <div>
           <label class="mt-6 text-2xl font-bold">Most used emojis </label><br />
-          <div v-if="stats.users" class="grid mt-2 grid-auto-flow grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
-            <div v-for="(emoji, i) in stats.emoji" :key="i" class="">
+          <div v-if="stats.users" 
+            class="mt-2 grid grid-auto-flow grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
+            <div v-for="(emoji, i) in stats.emoji" :key="i" 
+              :class="(i >= (stats.emoji.length -2)) ? 'col-span-1 md:col-span-2 lg:col-span-1' : ''">
               <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
-                  <label class="font-bold text-2xl my-auto text-primarylight">{{ emoji.count }} </label><br />
+                  <label class=" font-bold text-3xl my-auto text-primarylight">{{ emoji.count }} </label><br />
                   <span class="text-3xl mx-auto my-auto font-bold">{{ emoji.word }} </span>
               </div>
             </div>

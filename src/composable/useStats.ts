@@ -47,7 +47,6 @@ const heavyStats = async (file: File): Promise<Stats> => {
     const body = (await res.json()) as { [lang: string]: string[] }
     const stopWordLists = Object.values(body)
     return stopWordLists.reduce((ret, list) => [...ret, ...list], []).join('|')
-
   }
 
   const normalizeTime = (time: string): number => {
@@ -62,6 +61,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
     return ((stopDate.getTime() - startDate.getTime()) / 1000)
   }
 
+<<<<<<< HEAD
 
   const getThresold = (matches: RegExpMatchArray[]) => {
     let i = 0
@@ -88,6 +88,8 @@ const heavyStats = async (file: File): Promise<Stats> => {
   }
 
 
+=======
+>>>>>>> 8556d6262dba56a9325387f1201725bc94f3018a
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
 
@@ -98,7 +100,6 @@ const heavyStats = async (file: File): Promise<Stats> => {
   const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
   const matches = [...content.matchAll(re)];
 
-  //
   const userCounters: { [username: string]: any } = {}
 
   const incrementCounter = (user: string, prop: string, amount = 1) => {
@@ -106,13 +107,11 @@ const heavyStats = async (file: File): Promise<Stats> => {
       userCounters[user] = {}
     if (!userCounters[user][prop])
       userCounters[user][prop] = 0
-
     userCounters[user][prop] += amount
   }
-  // const messagesCount: { [username: string]: number } = {}
+
   // generates map like  {0:0, 1:0, ..., 23: 0}
   const hours: { [hour: number]: number } = Array.from<number>({ length: 24 }).reduce((map, value, i) => ({ ...map, [i]: 0 }), {})
-
   const wordsCount: { [word: string]: number } = {}
   const emojiCount: { [word: string]: number } = {}
   const stopWords = await loadStopWords()
@@ -120,7 +119,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
   const countWords = (message: string) => {
     if (message.match(/<Media\s(.*?)>/gm)) return void 0
 
-    const words = message.split(' ').filter(w => w.length > 2)
+    const words = message.toLowerCase().split(' ').map(w => w.trim()).filter(w => w.length);
 
     const emojis = message.match(/\p{Emoji_Presentation}/gu);
     emojis?.forEach((w) => {
@@ -128,37 +127,42 @@ const heavyStats = async (file: File): Promise<Stats> => {
     })
 
     words.forEach((w) => {
-      if (stopWords.includes(w.toLowerCase()) || w.match(/\p{Emoji_Presentation}/gu)) return void 0
-      wordsCount[w.toLowerCase()] = (wordsCount[w.toLowerCase()] ?? 0) + 1
+      if (stopWords.includes(w) || w.match(/\p{Emoji_Presentation}/gu)) return void 0
+      wordsCount[w] = (wordsCount[w] ?? 0) + 1
     })
   }
 
   let lastMessage: { username: string, datetime: Date } | undefined;
+<<<<<<< HEAD
   const THRESHOLD = getThresold(matches)
   console.log('THRESHOLD', THRESHOLD / (60 * 60))
+=======
+  const THRESHOLD = (60 * 60 * 4) // 2 hours
+>>>>>>> 8556d6262dba56a9325387f1201725bc94f3018a
 
   for (const match of matches) {
-
     const [_, date, time, username, message] = match;
 
-    //  message counter
+    // - message counter
     if (message.match(/<Media\s(.*?)>/gm)) {
       incrementCounter(username, 'media')
     } else {
       incrementCounter(username, 'text')
     }
 
-    // [DONE] - hours distribution
+    // - hours distribution
     const t = normalizeTime(time)
     hours[t]++
 
-    // word/emoji counter
+    // - word/emoji counter
     countWords(message)
 
     // - response time & started startedConversations per person 
-
     const datetime = new Date([date, time].join(' '))
+<<<<<<< HEAD
     //(60 * 60 * 2)
+=======
+>>>>>>> 8556d6262dba56a9325387f1201725bc94f3018a
 
     if (!lastMessage) {
       incrementCounter(username, 'startedConversations');
