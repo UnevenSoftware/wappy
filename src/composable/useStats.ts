@@ -16,6 +16,7 @@ interface UserStats {
   messagesCount: number
   mediaCount: number
   responseTime: string
+  startedConversations: number
 }
 
 interface IUseStats {
@@ -122,34 +123,45 @@ const heavyStats = async (file: File): Promise<Stats> => {
     const t = normalizeTime(time)
     hours[t]++
 
-    // word counter
+    // word/emoji counter
     countWords(message)
 
-    // - top 5 words/emoji per person
-    // - media over messages (%)
-    // [DONE] - response time per person (?)
-    if (lastMessage && lastMessage.username.toLowerCase() != username.toLowerCase()) {
-      const responseTime = rangeBetweenDates(new Date(lastMessage.datetime), new Date([date, time].join(' '))); // returns range in seconds
-      if (responseTime <= 14400) { // 14400 seconds in 4 hour // filtering out responses after 4 hour
-        incrementCounter(username, 'gloabalResponseTime', responseTime)
+    // - response time & started startedConversations per person 
+
+    const datetime = new Date([date, time].join(' '))
+    const THRESOLD = 14400
+
+    if (!lastMessage) {
+      incrementCounter(username, 'startedConversations');
+    } else {
+      const differentPerson = lastMessage.username.toLowerCase() != username.toLowerCase()
+      const diffTime = rangeBetweenDates(new Date(lastMessage.datetime), datetime)
+
+      // count startConversations
+      if (diffTime > THRESOLD) {
+        incrementCounter(username, 'startedConversations');
+      } else if (differentPerson) {
+        // responseTime
+        incrementCounter(username, 'gloabalResponseTime', diffTime)
         incrementCounter(username, 'numberOfResponses');
       }
     }
 
     lastMessage = {
       username,
-      datetime: new Date([date, time].join(' '))
+      datetime
     }
   }
 
   const users = Object.entries(userCounters).map((entry) => {
     const [username, counters] = entry
-    const { media, text, gloabalResponseTime, numberOfResponses } = counters
+    const { media, text, gloabalResponseTime, numberOfResponses, startedConversations } = counters
     return {
       username: username,
       messagesCount: text,
       mediaCount: media,
-      responseTime: (gloabalResponseTime / numberOfResponses).toFixed()
+      responseTime: (gloabalResponseTime / numberOfResponses).toFixed(),
+      startedConversations
     }
   })
 
