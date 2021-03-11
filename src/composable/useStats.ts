@@ -129,7 +129,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
     // - response time & started startedConversations per person 
 
     const datetime = new Date([date, time].join(' '))
-    const THRESOLD = 14400
+    const THRESHOLD = (60 * 60 * 2)
 
     if (!lastMessage) {
       incrementCounter(username, 'startedConversations');
@@ -138,7 +138,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
       const diffTime = rangeBetweenDates(new Date(lastMessage.datetime), datetime)
 
       // count startConversations
-      if (diffTime > THRESOLD) {
+      if (diffTime > THRESHOLD) {
         incrementCounter(username, 'startedConversations');
       } else if (differentPerson) {
         // responseTime
