@@ -8,12 +8,19 @@
   "parserOptions": {
     "parser": "@typescript-eslint/parser"
   },
-  "plugins": ["vue"],
+  "plugins": [
+    "vue"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/vue"
-  ]
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": [
+      false
+    ]
+  }
 }

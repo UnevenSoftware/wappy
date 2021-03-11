@@ -1,6 +1,5 @@
 import { ref, Ref } from 'vue'
 import { useWebWorkerFn } from '@vueuse/core'
-import { defineConfig } from 'vite'
 
 interface Stats {
   count: number
@@ -16,7 +15,7 @@ interface UserStats {
   username: string
   messagesCount: number
   mediaCount: number
-  responseTime?: number
+  responseTime: string
 }
 
 interface IUseStats {
@@ -56,7 +55,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
   }
 
   // responeTime Utils
-  const rangeBetweenDates = (startDate: Date, stopDate:Date) => {
+  const rangeBetweenDates = (startDate: Date, stopDate: Date) => {
     return ((stopDate.getTime() - startDate.getTime()) / 1000)
   }
 
@@ -106,8 +105,8 @@ const heavyStats = async (file: File): Promise<Stats> => {
     })
   }
 
-  const lastMessage: {username:string, datetime: Date} = {};
-  let firstCicle = true;
+  let lastMessage: { username: string, datetime: Date } | undefined;
+
   for (const match of matches) {
 
     const [_, date, time, username, message] = match;
@@ -129,16 +128,18 @@ const heavyStats = async (file: File): Promise<Stats> => {
     // - top 5 words/emoji per person
     // - media over messages (%)
     // [DONE] - response time per person (?)
-    if(!firstCicle && lastMessage.username.toLowerCase() != username.toLowerCase()){
+    if (lastMessage && lastMessage.username.toLowerCase() != username.toLowerCase()) {
       const responseTime = rangeBetweenDates(new Date(lastMessage.datetime), new Date([date, time].join(' '))); // returns range in seconds
-      if(responseTime <= 14400){ // 14400 seconds in 4 hour // filtering out responses after 4 hour
+      if (responseTime <= 14400) { // 14400 seconds in 4 hour // filtering out responses after 4 hour
         incrementCounter(username, 'gloabalResponseTime', responseTime)
         incrementCounter(username, 'numberOfResponses');
       }
-    } else if(firstCicle) firstCicle = false;
-    
-    lastMessage.username = username
-    lastMessage.datetime = new Date([date, time].join(' '))
+    }
+
+    lastMessage = {
+      username,
+      datetime: new Date([date, time].join(' '))
+    }
   }
 
   const users = Object.entries(userCounters).map((entry) => {
@@ -159,7 +160,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
     count: matches.length,
     messages: users.reduce((amount, el) => amount + (el.messagesCount || 0), 0),
     medias: users.reduce((amount, el) => amount + (el.mediaCount || 0), 0),
-    users: users, 
+    users: users,
     hours: hours,
     words: words,
     emoji: emoji
