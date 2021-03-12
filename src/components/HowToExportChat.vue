@@ -1,12 +1,14 @@
 <template>
   <div class="mt-16 text-center">
-    <div class="text-3xl font-bold  text-primarylight">
+    <div class="text-3xl font-bold  text-primarylight ">
       How to Export Chats
     </div>
     <div class="p-4 rounded-lg shadow-lg space-y-6
       dark:bg-dark-bglayer-1 bg-light-bglayer-1">
-
-      <span class=" text-primarylight text-md italic">NB: Media files aren't required to elaborate stats, you can export your chats when asked and upload only the txt file.</span>
+        <div class="flex flex-wrap lg:flex-no-wrap pt-2 text-primarylight text-md italic justify-center">
+          <i-eva-info-fill class="my-auto mx-2 w-6 h-6"/>
+          <span class="my-auto">Media files aren't required to elaborate stats, you can export your chats when asked and upload only the txt file.</span>
+        </div>
         <!-- android -->
         <div class="text-2xl shadow-lg text-primarylight font-bold rounded-lg
            dark:bg-dark-bglayer-2 bg-light-bglayer-2">
