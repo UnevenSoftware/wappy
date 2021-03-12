@@ -2,6 +2,7 @@
   <div>
     <uploader @uploaded="fileSelected" :loading="loading"></uploader>
     <stats v-if="stats && !loading" :stats="stats"> </stats>
+    <how-to-export-chat v-if="!stats && !loading"/>
   </div>
 </template>
 <style scoped>
