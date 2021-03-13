@@ -116,7 +116,7 @@ const heavyStats = async (file: File): Promise<Stats> => {
   const countWords = (message: string) => {
     if (message.match(/<Media\s(.*?)>/gm)) return void 0
 
-    const words = message.toLowerCase().split(' ').map(w => w.trim()).filter(w => w.length);
+    const words = message.toLowerCase().split(' ').map(w => w.trim()).filter(w => w.length > 2);
 
     const emojis = message.match(/\p{Emoji_Presentation}/gu);
     emojis?.forEach((w) => {

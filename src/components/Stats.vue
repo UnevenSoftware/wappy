@@ -25,7 +25,7 @@
         <!-- Hours Distribution -->
         <div>
           <span class="text-2xl font-bold">Hours Distribution</span>
-          <bar-chart class="mt-2" :hours="stats.hours"></bar-chart>
+          <bar-chart class="" :hours="stats.hours"></bar-chart>
         </div>
         <!-- WORDS -->
         <div>
