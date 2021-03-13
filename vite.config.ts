@@ -17,11 +17,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    Voie({
-      extendRoute: (route, _) => {
-        route.path = `${base}${route.path}`
-      }
-    }),
+    Voie(),
     ViteComponents({
       customComponentResolvers: ViteIconsResolver(),
     }),
