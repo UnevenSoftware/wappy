@@ -6,7 +6,10 @@ import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 
 import { defineConfig } from 'vite'
 
+const base = '/WAnalyzer'
+
 export default defineConfig({
+  base: `${base}/`,
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
@@ -14,7 +17,11 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    Voie(),
+    Voie({
+      extendRoute: (route, _) => {
+        route.path = `${base}${route.path}`
+      }
+    }),
     ViteComponents({
       customComponentResolvers: ViteIconsResolver(),
     }),
