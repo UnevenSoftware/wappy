@@ -1,13 +1,15 @@
-# Wa
-Import your WhatsApp chat and show you some cool stats
+# WhatsApp Analyzer (WIP)
+Import your WhatsApp chat to view cool stats!
+
+Live [Demo](https://unevensoftware.github.io/WAnalyzer/)
 
 ### MVP
 - count per person [x]
 - top 10 words/emoji per person
 - hours distribuiton
 - media over messages (%)
-
-- response time per person (?)
+- response time per person
+- number of conversation started
 
 ## Stats
 
@@ -27,6 +29,3 @@ Import your WhatsApp chat and show you some cool stats
 #### Ranks
 - most used words
 - most used emojis
-
-#### Values
-- 
