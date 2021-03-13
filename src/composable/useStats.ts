@@ -216,7 +216,7 @@ const useStats = (mock?: Stats): IUseStats => {
     console.time("readFile")
     loading.value = true
     try {
-      stats.value = await workerFn(file);
+      stats.value = await heavyStats(file);
     } catch (e) {
       console.error(e)
       error.value = e
