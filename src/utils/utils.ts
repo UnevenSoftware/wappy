@@ -37,7 +37,7 @@ const formatTime = (s: number):string=>{
  * @returns percentage of value based on max
  */
 const getPercentage = (max: number, value: number):string => {
-  return ((value / max) * 100).toFixed(2)
+  return value > 0 ? ((value / max) * 100).toFixed(2) : '0'
 }
 
 /**

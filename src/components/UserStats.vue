@@ -27,7 +27,8 @@
         </div>
       </div>
     </div>
-    <div class="p-2 mt-4 rounded-lg w-full self-end border-2
+    <div v-if="userstats.responseTime > 0" 
+      class="p-2 mt-4 rounded-lg w-full self-end border-2
         dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender
         bg-light-bgmessage_sender_quote border-light-bgmessage_sender">
       <div class="rounded-lg flex">
