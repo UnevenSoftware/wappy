@@ -1,6 +1,14 @@
 <template>
   <div>
-    <uploader @uploaded="fileSelected" :loading="loading"></uploader>
+    <uploader @uploaded="fileSelected" :loading="loading" :error="error"></uploader>
+
+    <div v-if="error" class="p-6 my-4 rounded-lg text-lg font-semibold 
+      text-red-900 bg-red-500
+      flex flex-wrap lg:flex-no-wrap justify-center">
+      <i-fluent-document-error-20-filled class="my-auto mx-2 w-6 h-6"/>
+      <span class="my-auto">{{error}}</span>
+    </div>
+
     <stats v-if="stats && !loading" :stats="stats"> </stats>
     <how-to-export-chat v-if="!stats && !loading"/>
   </div>
@@ -17,8 +25,7 @@ import useStats from '~/composable/useStats'
 
 export default defineComponent({
   setup() {
-    const { stats, readFile, loading } = useStats()
-
+    let { stats, readFile, loading, error } = useStats()
     // watch(stats, (v) => console.log('stats', v))
 
     const fileSelected = (f: any) => {
@@ -31,7 +38,8 @@ export default defineComponent({
     return {
       fileSelected,
       stats,
-      loading
+      loading,
+      error
     }
   }
 })

@@ -49,7 +49,8 @@ import { ref, defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
-    loading: Boolean
+    loading: Boolean,
+    error: Error
   },
   setup(){
     let fileSelected = ref();
@@ -60,7 +61,7 @@ export default defineComponent({
     }
     
     const handleFileDrop = function(e){
-      if(!this.loadinng){
+      if(!this.loading){
         let droppedFiles = e.dataTransfer.files;
         if(!droppedFiles) return;
         ([...droppedFiles]).forEach(f => {

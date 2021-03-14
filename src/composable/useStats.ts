@@ -214,14 +214,21 @@ const useStats = (mock?: Stats): IUseStats => {
 
   const readFile = async (file: File) => {
     console.time("readFile")
-    loading.value = true
-    try {
-      stats.value = await heavyStats(file);
-    } catch (e) {
-      console.error(e)
-      error.value = e
-    } finally {
-      loading.value = false
+    error.value = undefined;
+    loading.value = true;
+    if(file.name.toLowerCase().endsWith('.txt')){
+      try {
+        stats.value = await heavyStats(file);
+      } catch (e) {
+        console.error(e)
+        error.value = e
+      } finally {
+        loading.value = false
+      }
+    } else {
+        loading.value = false;
+        console.error('Unsupported File Type')
+        error.value = new Error('File Type not supported, please upload only txt Files.')
     }
     console.timeEnd("readFile")
   }
