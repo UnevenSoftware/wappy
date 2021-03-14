@@ -24,3 +24,9 @@ export default defineComponent({
   }
 })
 </script>
+<style>
+::selection{
+  color: #000;
+  background: #25D366;
+}
+</style>

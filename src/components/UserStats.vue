@@ -3,7 +3,7 @@
     <label class="font-bold text-2xl" :style="`color: ${stringToHSL(userstats.username)};`">
       {{ userstats.username }} {{ getProfileEmoji() }}</label><br/>
 
-    <div class="dark:bg-dark-bgmessage_sender bg-light-bgmessage_sender rounded-lg">
+    <div class="dark:bg-dark-bgmessage_sender bg-light-bgmessage_sender rounded-lg shadow-md">
       <div class="p-2  rounded-md w-full">
         <div class="text-4xl text-center flex font-bold mx-auto text-primarylight">
           <i-bx-bxs-message-alt-detail class="text-2xl mx-2 my-auto" />
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div v-if="userstats.responseTime > 0" 
-      class="p-2 mt-4 rounded-lg w-full self-end border-2
+      class="p-2 mt-4 rounded-lg w-full self-end border-2 shadow-md
         dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender
         bg-light-bgmessage_sender_quote border-light-bgmessage_sender">
       <div class="rounded-lg flex">
@@ -37,7 +37,7 @@
           <span class="text-accent">{{ formatTime(userstats.responseTime) }}</span> Medium Response time.</span>
       </div>
     </div>
-    <div class="p-2 mt-4 rounded-lg w-full self-end border-2 
+    <div class="p-2 mt-4 rounded-lg w-full self-end border-2 shadow-md
       dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
       bg-light-bgmessage_sender_quote border-light-bgmessage_sender">
       <div class="rounded-lg flex">

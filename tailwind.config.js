@@ -53,7 +53,7 @@ module.exports = {
     colors: colors,
     extend: {
       fontFamily: {
-        'sans': ['montserrat ', 'Roboto', 'sans-serif']
+        'sans': ['Montserrat', 'Roboto', 'sans-serif']
       },
       scale: {
         '-1': '-1'

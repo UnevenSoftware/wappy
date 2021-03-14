@@ -15,10 +15,8 @@ export default defineComponent({
     return {
       chartData: {
         labels: Object.keys(this.hours),
-        datasets: [
-          {
+        datasets: [{
             label: '# of Messages',
-            height: 560,
             backgroundColor: '#25D366',
             data: Object.values(this.hours)
           }
@@ -26,6 +24,7 @@ export default defineComponent({
       },
       chartOptions: {
         responsive: true,
+        aspectRatio: 1,
         maintainAspectRatio: false,
         legend: {
           display: false
@@ -33,8 +32,6 @@ export default defineComponent({
       }
     }
   },
-  mounted() {
-    this.renderChart(this.chartData, this.chartOptions)
-  }
+  mounted() { this.renderChart(this.chartData, this.chartOptions) }
 })
 </script>

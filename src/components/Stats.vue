@@ -38,7 +38,12 @@
                 <div class="my-auto">{{ word.word }}</div>
             </div>
           </div>
-        </div>
+           <div class=" mt-4 p-4 text-center text-xl rounded-lg w-full self-end border-2 shadow-lg
+            dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
+            bg-light-bgmessage_sender_quote border-light-bgmessage_sender">
+              "{{(stats.words.map(w => w.word)).join(" ")}}" -cit {{getProfileEmoji()}}
+            </div>
+        </div>       
 
         <!-- EMOJIS -->
         <div>
@@ -74,7 +79,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { isDark } from '~/utils'
+import { isDark, getProfileEmoji } from '~/utils'
 import UserStats from './UserStats.vue'
 
 export default defineComponent({
@@ -86,7 +91,7 @@ export default defineComponent({
     }
   },
   setup() {
-    return { }
+    return { getProfileEmoji }
   }
 })
 </script>
