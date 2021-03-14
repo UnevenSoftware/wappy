@@ -10,12 +10,12 @@
       class="p-6 my-4 rounded-lg text-lg font-semibold 
       text-red-900 bg-red-500
       flex flex-wrap lg:flex-no-wrap justify-center">
-      <i-fluent-document-error-20-filled class="my-auto mx-2 w-6 h-6"/>
-      <span class="my-auto">{{error}}</span>
+        <i-fluent-document-error-20-filled class="my-auto mx-2 w-6 h-6"/>
+        <span class="my-auto">{{error}}</span>
     </div>
 
     <stats v-if="stats && !loading" :stats="stats"> </stats>
-    <how-to-export-chat v-if="!stats && !loading"/>
+    <how-to-export-chat v-if="!stats && !loading" />
   </div>
 </template>
 <style scoped>
