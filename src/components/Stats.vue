@@ -31,7 +31,7 @@
         <div>
           <label class="mt-6 text-2xl font-bold text">Most used words </label><br />
           <div v-if="stats.users" class="grid mt-2 grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
-            <div v-for="(word, i) in stats.words" :key="i" 
+            <div v-for="(word, i) in stats.words" :key="i" :ref="setItemRef"
               class="px-2 py-4 rounded-md shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3 my-auto 
                 text-3xl font-bold flex">
                 <div class="ml-2 mr-8 text-primarylight my-auto">{{ word.count }}</div>
@@ -50,7 +50,7 @@
           <label class="mt-6 text-2xl font-bold">Most used emojis </label><br />
           <div v-if="stats.users" 
             class="mt-2 grid grid-auto-flow grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
-            <div v-for="(emoji, i) in stats.emoji" :key="i" 
+            <div v-for="(emoji, i) in stats.emoji" :key="i" :ref="setItemRef"
               :class="(i >= (stats.emoji.length -2)) ? 'col-span-1 md:col-span-2 lg:col-span-1' : ''">
               <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
                   <label class=" font-bold text-3xl my-auto text-primarylight">{{ emoji.count }} </label><br />
@@ -67,7 +67,7 @@
       <span class="mt-12 mb-6 text-4xl font-semibold">User Stats </span>
       <div v-if="stats.users" class="grid grid-auto-flow md:grid-cols-2 gap-2" 
         :class="stats.users.length > 2  ? 'xl:grid-cols-3' : 'xl:grid-cols-2'"> 
-        <user-stats 
+        <user-stats :ref="setItemRef"
           v-for="(userstats, i) in stats.users" :key="i" 
           :globalstats="{count: stats.count }" :userstats="userstats">
         </user-stats>
@@ -78,8 +78,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { isDark, getProfileEmoji } from '~/utils'
+import { defineComponent, ref } from 'vue'
+import { isDark, getProfileEmoji, animeSlideUp } from '~/utils'
 import UserStats from './UserStats.vue'
 
 export default defineComponent({
@@ -91,7 +91,20 @@ export default defineComponent({
     }
   },
   setup() {
-    return { getProfileEmoji }
-  }
+    let itemRefs: [] = [];
+    const setItemRef = (el) => {
+      if (el) {
+        itemRefs.push(el)
+      }
+    }
+    
+    return { getProfileEmoji, setItemRef, itemRefs }
+  },
+  mounted() {
+    for(const ref of this.itemRefs){
+      console.log(ref)
+      animeSlideUp(ref);
+    }
+  },
 })
 </script>

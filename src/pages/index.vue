@@ -1,8 +1,13 @@
 <template>
   <div>
-    <uploader @uploaded="fileSelected" :loading="loading" :error="error"></uploader>
+    <uploader ref='uRef' 
+      @uploaded="fileSelected" 
+      :loading="loading" 
+      :error="error"
+      class="opacity-0"></uploader>
 
-    <div v-if="error" class="p-6 my-4 rounded-lg text-lg font-semibold 
+    <div ref='errRef' v-if="error" 
+      class="p-6 my-4 rounded-lg text-lg font-semibold 
       text-red-900 bg-red-500
       flex flex-wrap lg:flex-no-wrap justify-center">
       <i-fluent-document-error-20-filled class="my-auto mx-2 w-6 h-6"/>
@@ -20,13 +25,23 @@
 </style>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { ref, defineComponent, watch, nextTick  } from 'vue'
 import useStats from '~/composable/useStats'
+import {animeSlideUp} from '~/utils'
 
 export default defineComponent({
+  mounted(){
+    animeSlideUp(this.uRef);
+  },
   setup() {
+    const uRef = ref()
+    const errRef = ref()
     let { stats, readFile, loading, error } = useStats()
-    // watch(stats, (v) => console.log('stats', v))
+    
+    watch(error, async function(e){
+      console.log("event" ,e)
+      animeSlideUp(errRef)
+    })
 
     const fileSelected = (f: any) => {
       const file = f
@@ -39,7 +54,10 @@ export default defineComponent({
       fileSelected,
       stats,
       loading,
-      error
+      error,
+      uRef,
+      errRef,
+      animeSlideUp
     }
   }
 })

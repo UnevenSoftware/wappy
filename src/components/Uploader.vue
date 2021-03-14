@@ -6,6 +6,7 @@
     dark:text-dark-label dark:border-primarydark  
     bg-light-bglayer-2 hover:bg-light-bglayer-3
     border-primarylight text-light-label">
+    
     <div class="rounded-xl p-8 cursor-pointer 
       text-center items-center" @click="inputClick">
 
@@ -46,13 +47,14 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
+import {animeSlideUp} from '~/utils'
 
 export default defineComponent({
   props: {
     loading: Boolean,
     error: Error
   },
-  setup(){
+  setup({loading},{emit}){
     let fileSelected = ref();
     const fileInput = ref()
 
@@ -61,23 +63,23 @@ export default defineComponent({
     }
     
     const handleFileDrop = function(e){
-      if(!this.loading){
+      if(!loading){
         let droppedFiles = e.dataTransfer.files;
         if(!droppedFiles) return;
         ([...droppedFiles]).forEach(f => {
           console.log(f)
           fileSelected.value = f;
-          this.$emit('uploaded', fileSelected.value);
+          emit('uploaded', fileSelected.value);
         });  
       }
     }
 
     const handleFileInput = function(e){ 
-      if(!this.loading){
+      if(!loading){
         let files = e.target.files
         if(!files) return;
         fileSelected.value = files[0];
-        this.$emit('uploaded', fileSelected.value);
+        emit('uploaded', fileSelected.value);
       }
     }
 
