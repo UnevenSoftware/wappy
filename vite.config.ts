@@ -3,6 +3,7 @@ import Voie from 'vite-plugin-voie'
 import ViteComponents from 'vite-plugin-components'
 import vue from '@vitejs/plugin-vue'
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
+import WindiCSS from 'vite-plugin-windicss'
 
 import { defineConfig } from 'vite'
 
@@ -21,6 +22,7 @@ export default defineConfig({
     ViteComponents({
       customComponentResolvers: ViteIconsResolver(),
     }),
-    ViteIcons()
+    ViteIcons(),
+    WindiCSS()
   ]
 })

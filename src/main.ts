@@ -1,3 +1,4 @@
+import 'virtual:windi.css'
 import './main.postcss'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
