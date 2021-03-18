@@ -10,8 +10,3 @@
     opacity-75 transition duration-200 ease-in-out
     hover:opacity-100;
 }
-
-body{
-  /* @apply font-sans; */
-  
-}

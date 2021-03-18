@@ -1,7 +1,7 @@
 import path from 'path'
-import Voie from 'vite-plugin-voie'
+import Pages from 'vite-plugin-pages';
 import ViteComponents from 'vite-plugin-components'
-import vue from '@vitejs/plugin-vue'
+import Vue from '@vitejs/plugin-vue'
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import WindiCSS from 'vite-plugin-windicss'
 
@@ -17,8 +17,8 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue(),
-    Voie(),
+    Vue(),
+    Pages(),
     ViteComponents({
       customComponentResolvers: ViteIconsResolver(),
     }),

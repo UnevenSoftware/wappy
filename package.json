@@ -34,8 +34,7 @@
     "vite": "^2.0.4",
     "vite-plugin-components": "^0.7.4",
     "vite-plugin-icons": "^0.3.1",
-    "vite-plugin-voie": "^0.7.3",
-    "vite-plugin-windicss": "^0.8.3",
-    "voie-pages": "^0.4.0"
+    "vite-plugin-pages": "^0.7.2",
+    "vite-plugin-windicss": "^0.8.3"
   }
 }
