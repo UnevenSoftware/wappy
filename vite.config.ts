@@ -8,7 +8,7 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 
 import { defineConfig } from 'vite'
 
-const base = '/WAnalyzer'
+const base = '/wappy'
 
 export default defineConfig({
   base: `${base}/`,
