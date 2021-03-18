@@ -4,6 +4,7 @@ import ViteComponents from 'vite-plugin-components'
 import Vue from '@vitejs/plugin-vue'
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import WindiCSS from 'vite-plugin-windicss'
+import VueI18n from '@intlify/vite-plugin-vue-i18n'
 
 import { defineConfig } from 'vite'
 
@@ -23,6 +24,9 @@ export default defineConfig({
       customComponentResolvers: ViteIconsResolver(),
     }),
     ViteIcons(),
-    WindiCSS()
+    WindiCSS(),
+    VueI18n({
+      include: path.resolve(__dirname, 'locales/**'),
+    }),
   ]
 })

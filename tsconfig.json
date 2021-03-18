@@ -20,6 +20,10 @@
       ]
     }
   },
+  "types": [
+    "vue-i18n/dist",
+    "@intlify/vite-plugin-vue-i18n/client"
+  ],
   "exclude": [
     "dist",
     "node_modules"

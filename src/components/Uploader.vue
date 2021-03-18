@@ -10,7 +10,7 @@
         <div class="transform scale-x-n1">
           <i-ant-design-paper-clip-outlined class="text-6xl block mx-auto dark:text-dark-icon text-light-icon" />
         </div>
-        <span class="dark:text-dark-text text-light-text"> Click to Upload Or Drag a File! </span>
+        <span class="dark:text-dark-text text-light-text"> {{ t('uploader.title') }} </span>
         <input ref="fileInput" class="hidden" type="file" @change="handleFileInput" accept=".txt" />
       </div>
 
@@ -19,7 +19,7 @@
           <i-mdi-loading class="dark:text-dark-icon text-light-icon" />
         </div>
         <span class="my-auto text-2xl italic font-light cursor-text dark:text-dark-text text-light-text">
-          Elaborating your file!
+          {{ t('uploader.loading') }}
         </span>
       </div>
     </div>
@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
-import { animeSlideUp } from '~/utils'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   props: {
@@ -70,7 +70,9 @@ export default defineComponent({
       }
     }
 
-    return { fileSelected, inputClick, fileInput, handleFileDrop, handleFileInput }
+    const { t } = useI18n()
+
+    return { fileSelected, inputClick, fileInput, handleFileDrop, handleFileInput, t }
   }
 })
 </script>
