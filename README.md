@@ -1,31 +1,16 @@
-# WhatsApp Analyzer (WIP)
-Import your WhatsApp chat to view cool stats!
+<h1 align="center">wappy</h1>
 
-Live [Demo](https://unevensoftware.github.io/WAnalyzer/)
-
-### MVP
-- count per person [x]
-- top 10 words/emoji per person
-- hours distribuiton
-- media over messages (%)
-- response time per person
-- number of conversation started
+<p align="center">
+  Import your WhatsApp chat to view cool stats!<br/>
+<a href="https://unevensoftware.github.io/wappy" target="__blank"><b>Live demo<b></a>
+</p>
 
 ## Stats
+- Number of messages and media
+- Messages distribuition over hours
+- Most used words and emojis
+- Average response time
+- Number of conversation started
 
-### Time based
-
-#### Histograms
-- week distribuiton
-- hours distribuiton
-- whole time series (?)
-
-#### Values
-- max/min/mean response time (pro version)
-- session durations (?)
-
-### Words based
-
-#### Ranks
-- most used words
-- most used emojis
+## License
+MIT - Copyright (c) 2021 Uneven Software
