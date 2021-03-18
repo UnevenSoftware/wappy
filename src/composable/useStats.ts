@@ -1,5 +1,21 @@
 import { ref, Ref } from 'vue'
-import { Stats, getStats } from '~/workers/stats'
+import { Stats } from '~/workers/stats'
+import WorkerStats from '~/workers/stats?worker'
+
+const getStats = (file: File): Promise<Stats> => {
+  return new Promise((resolve, reject) => {
+    const w = new WorkerStats()
+    w.onmessage = (e) => {
+      const [status, data] = e.data
+      if (status === 'SUCCESS') {
+        resolve(data)
+      } else {
+        reject(data)
+      }
+    }
+    w.postMessage(file)
+  })
+}
 
 interface IUseStats {
   readFile: (file: File) => Promise<void>

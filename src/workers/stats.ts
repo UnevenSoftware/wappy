@@ -204,20 +204,4 @@ const heavyStats = async (file: File): Promise<any> => {
 }
 
 
-import WorkerStats from '~/workers/stats?worker'
-
-const getStats = (file: File): Promise<Stats> => {
-  return new Promise((resolve, reject) => {
-    const w = new WorkerStats()
-    w.onmessage = (e) => {
-      const [status, data] = e.data
-      if (status === 'SUCCESS') {
-        resolve(data)
-      } else {
-        reject(data)
-      }
-    }
-    w.postMessage(file)
-  })
-}
-export { getStats, Stats }
+export { Stats }
