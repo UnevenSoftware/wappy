@@ -1,4 +1,4 @@
-<h1 align="center">wappy</h1>
+<h1 align="center">wappy 💌</h1>
 
 <p align="center">
   Import your WhatsApp chat to view cool stats!<br/>
