@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --port 3333 --open",
-    "build": "cross-env NODE_ENV=production vite build --base=/WAnalyzer/",
+    "build": "cross-env NODE_ENV=production vite build",
     "lint": "eslint --ext .js,.ts,.vue src/",
     "lint:fix": "eslint --fix --ext .js,.ts,.vue src/",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
