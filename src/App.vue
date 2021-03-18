@@ -1,12 +1,12 @@
 <template>
   <div
     id="app"
-    class="dark:bg-dark-bg bg-light-bg dark:text-dark-text text-light-text max-w-screen overflow-hidden"
+    class="dark:(bg-dark-bg text-dark-text) bg-light-bg min-h-screen text-light-text max-w-screen flex flex-col overflow-hidden"
     :style="getBgPattern()"
   >
     <Header />
-    <router-view class="container p-2 my-8 mx-auto min-h-screen" />
-    <Footer />
+    <router-view class="container p-2 my-8 mx-auto" />
+    <Footer class="mt-auto" />
   </div>
 </template>
 <script lang="ts">
@@ -25,8 +25,8 @@ export default defineComponent({
 })
 </script>
 <style>
-::selection{
+::selection {
   color: #000;
-  background: #25D366;
+  background: #25d366;
 }
 </style>

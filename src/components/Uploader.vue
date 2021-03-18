@@ -7,7 +7,7 @@
   >
     <div class="rounded-xl p-8 cursor-pointer text-center items-center" @click="inputClick">
       <div v-if="!loading">
-        <div class="">
+        <div class="transform scale-x-n1">
           <i-ant-design-paper-clip-outlined class="text-6xl block mx-auto dark:text-dark-icon text-light-icon" />
         </div>
         <span class="dark:text-dark-text text-light-text"> Click to Upload Or Drag a File! </span>
