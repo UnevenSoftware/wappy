@@ -38,9 +38,7 @@ const useStats = (mock?: Stats): IUseStats => {
 
   const readFile = async (file: File) => {
 
-
     console.time("readFile")
-    console.log(file, "")
     error.value = undefined;
     loading.value = true;
     if (isValidFile(file)) {

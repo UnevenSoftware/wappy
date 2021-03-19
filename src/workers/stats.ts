@@ -30,7 +30,6 @@ interface UserStats {
 const readFileAsync = async (file: File): Promise<string> => {
 
   if (file.type == 'application/zip') {
-    console.log("1", file)
     // create a BlobReader to read with a ZipReader the zip from a Blob object
     const reader = new zip.ZipReader(new zip.BlobReader(file));
 
@@ -94,11 +93,13 @@ const getThresold = (matches: RegExpMatchArray[]) => {
   return standardDeviation || MIN
 }
 
+const getMessageType = (message: string): 'message' | 'media' | 'system' => {
+  if (message.match(/(.*?)\s(omitted|omessi)>?$/gm)) return 'media'
+  if (message.match(/^(?=.*\bend-to-end\b)(?=.*\bWhatsApp\b).*$/gm)) return 'system'
+  return 'message'
+}
 
 const heavyStats = async (file: File): Promise<any> => {
-
-  // importScripts('~/utils/dark')
-
 
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
@@ -150,19 +151,25 @@ const heavyStats = async (file: File): Promise<any> => {
   for (const match of matches) {
     const [_, date, time, username, message] = match;
 
-    // - message counter
-    if (message.match(/<Media\s(.*?)>/gm)) {
-      incrementCounter(username, 'media')
-    } else {
-      incrementCounter(username, 'text')
+
+    switch (getMessageType(message)) {
+
+      case 'media':
+        incrementCounter(username, 'media')
+        break
+      case 'message':
+        incrementCounter(username, 'text')
+        countWords(message)
+        break
+      case 'system':
+      default:
+        continue;
     }
 
     // - hours distribution
     const t = normalizeTime(time)
     hours[t]++
 
-    // - word/emoji counter
-    countWords(message)
 
     // - response time & started startedConversations per person 
     const datetime = new Date([date, time].join(' '))
