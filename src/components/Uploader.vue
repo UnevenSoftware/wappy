@@ -11,7 +11,7 @@
           <i-ant-design-paper-clip-outlined class="text-6xl block mx-auto dark:text-dark-icon text-light-icon" />
         </div>
         <span class="dark:text-dark-text text-light-text"> {{ t('uploader.title') }} </span>
-        <input ref="fileInput" class="hidden" type="file" @change="handleFileInput" accept=".txt" />
+        <input ref="fileInput" class="hidden" type="file" @change="handleFileInput" accept=".txt, .zip" />
       </div>
 
       <div v-else>

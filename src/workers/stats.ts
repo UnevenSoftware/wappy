@@ -1,3 +1,4 @@
+import * as zip from "@zip.js/zip.js";
 
 onmessage = async function (e) {
   try {
@@ -26,17 +27,28 @@ interface UserStats {
   startedConversations: number
 }
 
-const readFileAsync = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      resolve(reader.result as string)
+const readFileAsync = async (file: File): Promise<string> => {
+
+  if (file.type == 'application/zip') {
+    console.log("1", file)
+    // create a BlobReader to read with a ZipReader the zip from a Blob object
+    const reader = new zip.ZipReader(new zip.BlobReader(file));
+
+    // get all entries from the zip
+    const entries = await reader.getEntries();
+    const textFile = entries.find(e => e.filename.endsWith('.txt'))
+    if (textFile != null) {
+      return await textFile.getData(new zip.TextWriter(), { useWebWorkers: false })
     }
-    reader.onerror = () => {
-      reject(reader.error)
-    }
-    reader.readAsText(file)
-  })
+
+    // close the ZipReader
+    await reader.close();
+
+  }
+
+
+  return file.slice(0, file.size).text()
+
 }
 
 const loadStopWords = async (): Promise<string> => {
@@ -95,7 +107,8 @@ const heavyStats = async (file: File): Promise<any> => {
   // time: (.*?)
   // user : (.*?)
   // message: (.+[^/]+\n)
-  const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
+  //const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
+  const re = /\[?(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\]?[-\]]\s(.*?):\s(.+[^\/]+\n)/gm
   const matches = [...content.matchAll(re)];
 
   const userCounters: { [username: string]: any } = {}

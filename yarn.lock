@@ -361,6 +361,11 @@
     sucrase "^3.17.1"
     windicss "^2.4.5"
 
+"@zip.js/zip.js@^2.2.23":
+  version "2.2.23"
+  resolved "https://registry.yarnpkg.com/@zip.js/zip.js/-/zip.js-2.2.23.tgz#a3eefb09bac92a455626d2b70ee84e4a77aa6db2"
+  integrity sha512-arbpkFqxlQmyXdbajYvCvbXwszbi8He2ENIKewdU4SIy21AoVlgX/kx7/vTxkNYb0qu3+ztCDTDmzFj7wWGwVA==
+
 acorn-jsx@^5.2.0, acorn-jsx@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.1.tgz#fc8661e11b7ac1539c47dbfea2e72b3af34d267b"
