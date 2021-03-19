@@ -1,51 +1,58 @@
 <template>
-  <div class="my-auto w-full h-full p-6 rounded-md shadow-lg flex flex-col dark:bg-dark-bglayer-2 bg-light-bglayer-2">
-    <label class="font-bold text-2xl" :style="`color: ${stringToHSL(userstats.username)};`">
-      {{ userstats.username }} {{ getProfileEmoji() }}</label><br/>
+  <div class="my-auto w-full h-full p-4 rounded-md shadow-lg flex flex-col dark:bg-dark-bglayer-2 bg-light-bglayer-2">
+    <label class="font-bold px-1 mb-4 text-2xl" :style="`color: ${stringToHSL(userstats.username)};`">
+      {{ userstats.username }} {{ getProfileEmoji() }}</label
+    >
 
-    <div class="dark:bg-dark-bgmessage_sender bg-light-bgmessage_sender rounded-lg shadow-md">
-      <div class="p-2  rounded-md w-full">
-        <div class="text-4xl text-center flex font-bold mx-auto text-primarylight">
-          <i-bx-bxs-message-alt-detail class="text-2xl mx-2 my-auto" />
+    <div class="p-4 dark:bg-dark-bgmessage_sender_quote bg-light-bgmessage_sender_quote rounded-lg shadow-md">
+      <div class="flex items-center">
+        <div class="flex flex-col">
+          <span class="text-2xl mb-0"> Messages</span>
+          <span class="text-base text-light-label text-sm font-thin dark:text-dark-label font-normal pb-1">
+            <span class="text-accent"> {{ getPercentage(globalstats.count, userstats.messagesCount) }}%</span> of all
+            messages</span
+          >
+        </div>
+        <div class="text-4xl ml-auto text-center items-end flex font-bold text-primarylight">
           {{ userstats.messagesCount }}
         </div>
-        <div class="text-lg mx-auto p-2 rounded-md w-full
-         dark:bg-dark-bgmessage_sender_quote bg-light-bgmessage_sender_quote">
-          ➔ <span class="text-accent">{{ getPercentage(globalstats.count, userstats.messagesCount) }}
-          %</span> of total messages.
-        </div>
       </div>
-      <div class="p-2 rounded-md w-full">
-        <div class="text-4xl text-center flex font-bold mx-auto text-primarylight">
-          <i-eva-image-2-fill class="text-2xl mx-2 my-auto" />
-          {{ userstats.mediaCount }}
+      <hr class="border-t-1 my-2 dark:border-primarydarker border-primarylight" />
+
+      <div class="flex items-center">
+        <div class="flex flex-col">
+          <span class="text-2xl mb-0">Media</span>
+          <span class="text-base text-light-label text-sm dark:text-dark-label font-thin pb-1">
+            <span class="text-accent"> {{ getPercentage(userstats.messagesCount, userstats.mediaCount) }}%</span> of
+            your messages</span
+          >
         </div>
-        <div class="text-lg mx-auto p-2 rounded-md w-full
-         dark:bg-dark-bgmessage_sender_quote bg-light-bgmessage_sender_quote">
-          ➔ <span class="text-accent">{{ getPercentage(userstats.messagesCount, userstats.mediaCount) }}
-          %</span> of your messages are shared Medias.
+        <div class="text-4xl ml-auto text-center items-end flex font-bold text-primarylight">
+          {{ userstats.mediaCount }}
         </div>
       </div>
     </div>
-    <div v-if="userstats.responseTime > 0" 
-      class="p-2 mt-4 rounded-lg w-full self-end border-2 shadow-md
-        dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender
-        bg-light-bgmessage_sender_quote border-light-bgmessage_sender">
+    <div
+      v-if="userstats.responseTime > 0"
+      class="p-2 mt-4 rounded-lg w-full self-end border-2 shadow-md dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender bg-light-bgmessage_sender_quote border-light-bgmessage_sender"
+    >
       <div class="rounded-lg flex">
         <i-bx-bx-timer class="text-2xl mx-2 my-auto text-primarylight" />
         <span class="text-lg">
-          <span class="text-accent">{{ formatTime(userstats.responseTime) }}</span> Medium Response time.</span>
+          Average response time <span class="text-accent">{{ formatTime(userstats.responseTime) }}</span>
+        </span>
       </div>
     </div>
-    <div class="p-2 mt-4 rounded-lg w-full self-end border-2 shadow-md
-      dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
-      bg-light-bgmessage_sender_quote border-light-bgmessage_sender">
+    <div
+      class="p-2 mt-4 rounded-lg w-full self-end border-2 shadow-md dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender bg-light-bgmessage_sender_quote border-light-bgmessage_sender"
+    >
       <div class="rounded-lg flex">
         <i-dashicons-format-chat class="text-2xl mx-2 my-auto text-primarylight" />
         <span class="text-lg">
-          <span class="text-accent">
-            Started {{ userstats.startedConversations }}</span> 
-            Conversations.</span>
+          Have started
+          <span class="text-accent"> {{ userstats.startedConversations }}</span>
+          conversations.</span
+        >
       </div>
     </div>
   </div>
