@@ -1,21 +1,19 @@
 <template>
-  <div class="mt-16 text-center">
-    <div class="text-3xl font-bold text-primarylight">
-      {{ t('export.title') }}
-    </div>
+  <div class="mt-10 text-center">
     <div class="p-4 rounded-lg shadow-lg space-y-6 dark:bg-dark-bglayer-1 bg-light-bglayer-1">
-      <div class="flex flex-wrap lg:flex-no-wrap pt-2 text-primarylight text-md italic justify-center">
-        <i-eva-info-fill class="my-auto mx-2 w-6 h-6" />
-        <span class="my-auto"
-          >Media files aren't required to elaborate stats, you can export your chats when asked and upload only the txt
-          file.</span
-        >
+      <div class="flex flex-wrap lg:flex-no-wrap pt-2 dark:text-dark-text text-light-text text-md justify-center">
+        <i-mdi-security class="my-auto mx-2" />
+        <span class="my-auto">{{ t('export.security') }}</span>
       </div>
+
+      <hr class="border-t-1 dark:border-primarydarker border-primarylight" />
+
+      <div class="tex-center text-xl font-bold">{{ t('export.title') }}</div>
       <!-- android -->
       <div class="text-2xl shadow-lg text-primarylight font-bold rounded-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
         <div class="rounded-lg p-6 w-full flex">
           <i-cib-android-alt class="text-4xl text-primarylight" />
-          <span class="my-auto mx-6">On Android</span>
+          <span class="my-auto mx-6">{{ t('export.android') }}</span>
         </div>
 
         <ul
@@ -39,7 +37,7 @@
       <div class="text-2xl shadow-lg text-primarylight font-bold rounded-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
         <div class="rounded-lg p-6 w-full flex">
           <i-cib-apple class="text-4xl text-primarylight" />
-          <span class="my-auto mx-6">On Iphone</span>
+          <span class="my-auto mx-6">{{ t('export.ios') }}</span>
         </div>
 
         <ul

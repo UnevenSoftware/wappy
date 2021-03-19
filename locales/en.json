@@ -4,6 +4,12 @@
     "loading": "Elaborating your file!"
   },
   "export": {
-    "title": "How to Export Chats"
+    "title": "How to Export Chats",
+    "security": "This site does not track you in any way, all the procesing is done on your device.",
+    "android": "On Android",
+    "ios": "On Iphone"
+  },
+  "meta": {
+    "description": "Import your WhatsApp chat to view cool stats!"
   }
 }

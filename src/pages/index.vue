@@ -1,6 +1,8 @@
 <template>
   <div>
     <uploader ref="uRef" @uploaded="fileSelected" :loading="loading" :error="error"></uploader>
+    <div class="dark:text-dark-text text-light-text text-center mt-3 text-sm"></div>
+
     <div
       ref="errRef"
       v-if="error"

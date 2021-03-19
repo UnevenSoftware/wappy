@@ -8,6 +8,7 @@ import messages from '@intlify/vite-plugin-vue-i18n/messages'
 import routes from 'virtual:generated-pages';
 
 import App from './App.vue'
+import { createHead } from '@vueuse/head'
 
 const app = createApp(App)
 
@@ -20,8 +21,6 @@ app.use(router)
 
 
 // i18n
-
-
 const i18n = createI18n({
   legacy: false,
   locale: 'en',
@@ -29,5 +28,9 @@ const i18n = createI18n({
 })
 
 app.use(i18n)
+
+// meta
+app.use(createHead())
+
 
 app.mount('#app', true)

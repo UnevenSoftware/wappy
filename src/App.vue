@@ -11,9 +11,18 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+import { useHead } from '@vueuse/head'
 import { isDark } from '~/utils'
 export default defineComponent({
   setup() {
+    const { t } = useI18n()
+    useHead({
+      title: 'wappy 💌',
+      meta: [{ name: 'description', content: t('meta.description') }]
+    })
+
     // Todo: Find a better way
     const getBgPattern = function () {
       return isDark.value
