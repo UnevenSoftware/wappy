@@ -25,7 +25,7 @@ const readFileAsync = async (file: File): Promise<string> => {
 
 const getStats = (file: File): Promise<Stats> => {
   return new Promise(async (resolve, reject) => {
-    const w = new Worker('worker-stats.js')
+    const w = new Worker('/wappy/worker-stats.js')
     w.onmessage = (e) => {
       const [status, data] = e.data
       if (status === 'SUCCESS') {
