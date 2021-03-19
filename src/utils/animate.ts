@@ -1,10 +1,10 @@
 import anime from 'animejs'
-import {Ref} from 'vue'
+import { Ref } from 'vue'
 
 const animeSlideUp = (ref) => {
   //ref.$el -> for custom components \\ ref -> for html elemntes
-  const target = ref.__v_isRef ? ref.value : ref; 
-  console.log("animate target:", ref);
+  const target = ref.__v_isRef ? ref.value : ref;
+  // console.log("animate target:", ref);
   anime({
     targets: target.$el ?? target,
     duration: 1200 + (Math.random() * 200),

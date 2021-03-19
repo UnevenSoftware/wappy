@@ -25,6 +25,10 @@ interface IUseStats {
   progress: Ref<number>
 }
 
+const isValidFile = (f: File): boolean => {
+  return ['text/plain', 'application/zip'].includes(f.type)
+}
+
 const useStats = (mock?: Stats): IUseStats => {
 
   const stats = ref<Stats | undefined>(mock)
@@ -33,10 +37,11 @@ const useStats = (mock?: Stats): IUseStats => {
   const error = ref<Error | undefined>(undefined)
 
   const readFile = async (file: File) => {
+
     console.time("readFile")
     error.value = undefined;
     loading.value = true;
-    if (file.name.toLowerCase().endsWith('.txt')) {
+    if (isValidFile(file)) {
       try {
         stats.value = await getStats(file);
       } catch (e) {
@@ -48,7 +53,7 @@ const useStats = (mock?: Stats): IUseStats => {
     } else {
       loading.value = false;
       console.error('Unsupported File Type')
-      error.value = new Error('File Type not supported, please upload only txt Files.')
+      error.value = new Error('File Type not supported, please upload only .txt or.zip files.')
     }
     console.timeEnd("readFile")
   }

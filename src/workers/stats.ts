@@ -1,3 +1,4 @@
+import * as zip from "@zip.js/zip.js";
 
 onmessage = async function (e) {
   try {
@@ -26,17 +27,27 @@ interface UserStats {
   startedConversations: number
 }
 
-const readFileAsync = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      resolve(reader.result as string)
+const readFileAsync = async (file: File): Promise<string> => {
+
+  if (file.type == 'application/zip') {
+    // create a BlobReader to read with a ZipReader the zip from a Blob object
+    const reader = new zip.ZipReader(new zip.BlobReader(file));
+
+    // get all entries from the zip
+    const entries = await reader.getEntries();
+    const textFile = entries.find(e => e.filename.endsWith('.txt'))
+    if (textFile != null) {
+      return await textFile.getData(new zip.TextWriter(), { useWebWorkers: false })
     }
-    reader.onerror = () => {
-      reject(reader.error)
-    }
-    reader.readAsText(file)
-  })
+
+    // close the ZipReader
+    await reader.close();
+
+  }
+
+
+  return file.slice(0, file.size).text()
+
 }
 
 const loadStopWords = async (): Promise<string> => {
@@ -82,11 +93,13 @@ const getThresold = (matches: RegExpMatchArray[]) => {
   return standardDeviation || MIN
 }
 
+const getMessageType = (message: string): 'message' | 'media' | 'system' => {
+  if (message.match(/(.*?)\s(omitted|omessi)>?$/gm)) return 'media'
+  if (message.match(/^(?=.*\bend-to-end\b)(?=.*\bWhatsApp\b).*$/gm)) return 'system'
+  return 'message'
+}
 
 const heavyStats = async (file: File): Promise<any> => {
-
-  // importScripts('~/utils/dark')
-
 
   console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
   const content = await readFileAsync(file)
@@ -95,7 +108,8 @@ const heavyStats = async (file: File): Promise<any> => {
   // time: (.*?)
   // user : (.*?)
   // message: (.+[^/]+\n)
-  const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
+  //const re = /(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\s-\s(.*?):\s(.+[^/]+\n)/gm
+  const re = /\[?(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(.*?)\]?[-\]]\s(.*?):\s(.+[^\/]+\n)/gm
   const matches = [...content.matchAll(re)];
 
   const userCounters: { [username: string]: any } = {}
@@ -137,19 +151,25 @@ const heavyStats = async (file: File): Promise<any> => {
   for (const match of matches) {
     const [_, date, time, username, message] = match;
 
-    // - message counter
-    if (message.match(/<Media\s(.*?)>/gm)) {
-      incrementCounter(username, 'media')
-    } else {
-      incrementCounter(username, 'text')
+
+    switch (getMessageType(message)) {
+
+      case 'media':
+        incrementCounter(username, 'media')
+        break
+      case 'message':
+        incrementCounter(username, 'text')
+        countWords(message)
+        break
+      case 'system':
+      default:
+        continue;
     }
 
     // - hours distribution
     const t = normalizeTime(time)
     hours[t]++
 
-    // - word/emoji counter
-    countWords(message)
 
     // - response time & started startedConversations per person 
     const datetime = new Date([date, time].join(' '))
