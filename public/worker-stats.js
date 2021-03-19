@@ -26,7 +26,6 @@ const rangeBetweenDates = (startDate, stopDate) => {
 }
 
 const getThresold = (matches) => {
-  console.log("weee");
   let i = 0;
   const MIN = 60 * 60 * 1
     , MAX = 60 * 60 * 7;
