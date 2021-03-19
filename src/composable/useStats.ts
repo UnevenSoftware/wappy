@@ -1,10 +1,31 @@
 import { ref, Ref } from 'vue'
+import * as zip from "@zip.js/zip.js";
 import { Stats } from '~/workers/stats'
-import WorkerStats from '~/workers/stats?worker'
+// import WorkerStats from '~/workers/stats?worker&inline'
+// console.log(WorkerStats)
+
+const readFileAsync = async (file: File): Promise<string> => {
+
+  if (file.type == 'application/zip') {
+    // create a BlobReader to read with a ZipReader the zip from a Blob object
+    const reader = new zip.ZipReader(new zip.BlobReader(file));
+
+    // get all entries from the zip
+    const entries = await reader.getEntries();
+    const textFile = entries.find(e => e.filename.endsWith('.txt'))
+    if (textFile != null) {
+      return await textFile.getData(new zip.TextWriter(), { useWebWorkers: false })
+    }
+    // close the ZipReader
+    await reader.close();
+  }
+
+  return file.slice(0, file.size).text()
+}
 
 const getStats = (file: File): Promise<Stats> => {
-  return new Promise((resolve, reject) => {
-    const w = new WorkerStats()
+  return new Promise(async (resolve, reject) => {
+    const w = new Worker('/worker-stats.js')
     w.onmessage = (e) => {
       const [status, data] = e.data
       if (status === 'SUCCESS') {
@@ -13,7 +34,7 @@ const getStats = (file: File): Promise<Stats> => {
         reject(data)
       }
     }
-    w.postMessage(file)
+    w.postMessage(await readFileAsync(file))
   })
 }
 
