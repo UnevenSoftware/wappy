@@ -8,6 +8,9 @@ cache:
 before_deploy:
   - "npm run build"
 
+# Skip tests
+script: 'true'
+
 deploy:
   provider: pages
   skip_cleanup: true
