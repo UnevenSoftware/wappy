@@ -11,14 +11,14 @@
                 {{ stats.messages }}</span
               >
               <br />
-              <span class="mx-auto font-bold tabular-nums oldstyle-nums">Total Messages</span>
+              <span class="mx-auto font-bold tabular-nums oldstyle-nums">Messages</span>
             </div>
             <div class="rounded-md p-6 shadow-lg text-2xl dark:bg-dark-bglayer-3 bg-light-bglayer-3">
               <span class="mx-auto text-5xl font-bold tabular-nums oldstyle-nums text-primarylight">
                 {{ stats.medias }}</span
               >
               <br />
-              <span class="mx-auto font-bold tabular-nums oldstyle-nums">Total Medias</span>
+              <span class="mx-auto font-bold tabular-nums oldstyle-nums">Media</span>
             </div>
           </div>
         </div>
