@@ -50,8 +50,8 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'HowToExportChat',
   setup() {
-    const { t, i18n } = useI18n()
-    return { t, i18n }
+    const { t } = useI18n()
+    return { t }
   }
 })
 </script>

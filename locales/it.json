@@ -1,0 +1,41 @@
+{
+  "uploader": {
+    "title": "Clicca o trascina per caricare un File!",
+    "loading": "Elaborazione in corso!"
+  },
+  "export": {
+    "title": "Come esportare le Chat",
+    "security": "Questo sito non vi rintraccia in nessun modo, tutta l'elaborazione è fatta sul vostro dispositivo",
+    "android": "Da Android",
+    "ios": "Da Iphone",
+    "android-steps": [
+      "<span class='text-accent'>1. </span> Apri la chat individuale o di gruppo.",
+      "<span class='text-accent'>2. </span> Tocca Altre opzioni <i-fluent-more-vertical-28-filled class='text-accent my-auto'/> ➔ Altro ➔ Esporta chat.",
+      "<span class='text-accent'>3. </span> Scegli se includere i file multimediali (i file multimediali non sono neccessari per l'elaborazione).",
+      "<span class='text-accent'>4. </span> Scegli dove salvare i file. (MN: se si ha già installato un <span class='text-accent'>file explorer</span> sul dispositivo usatelo sia per il salvataggio che il caricamento del file)"
+    ],
+    "ios-steps": [
+      "<span class='text-accent'>1. </span>Apri la chat individuale o di gurppo che si vuole esportare.",
+      "<span class='text-accent'>2. </span>Tocca il nome del contatto o il nome del gruppo.",
+      "<span class='text-accent'>3. </span>Tocca Esporta Chat.",
+      "<span class='text-accent'>4. </span>Scegli se includere i file multimediali (i file multimediali non sono neccessari per l'elaborazione).",
+      "<span class='text-accent'>5. </span>Apri l'app <span class='text-accent'>file explorer</span>."
+    ]
+  },
+  "meta": {
+    "description": "Importa le tue chat di WhatsApp, e visualizza statistiche interessanti!"
+  },
+  "not-found": "Not Found!",
+  "chat-stats": "Statistiche della chat",
+  "messages": "Messaggi",
+  "media": "Media",
+  "hours-distribution": "Distribuzione oraria",
+  "most-used-words": "Le parole più utilizzate",
+  "most-used-emojis": "Gli emojis più utilizzati",
+  "user-stats": "Statische degli utenti",
+  "of-all-messages": "su tutti i messaggi",
+  "of-your-messages": "dei tuoi messaggi",
+  "average-response-time": "Tempo di risposta medio",
+  "have-started": "Ha lanciato",
+  "conversations": "conversazioni"
+}
