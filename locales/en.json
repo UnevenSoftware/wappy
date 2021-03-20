@@ -7,9 +7,26 @@
     "title": "How to Export Chats",
     "security": "This site does not track you in any way, all the procesing is done on your device.",
     "android": "On Android",
-    "ios": "On Iphone"
+    "ios": "On Iphone",
+    "android-steps": [
+      "<span class='text-accent'>1. </span> Open the individual or group chat.",
+      "<span class='text-accent'>2. </span> Tap More options <i-fluent-more-vertical-28-filled class='text-accent my-auto'/> ➔ More ➔ Export chat.",
+      "<span class='text-accent'>3. </span> Choose whether to export with media or without media.",
+      "<span class='text-accent'>4. </span> Choose where to save your files. (If you have a <span class='text-accent'>file explorer</span> app installed on your phone save it using the explorer and then import)"
+    ],
+    "ios-steps": [
+      "<span class='text-accent'>1. </span>Open the individual or group chat you’d like to save.",
+      "<span class='text-accent'>2. </span>Tap the contact's name or group subject.",
+      "<span class='text-accent'>3. </span>Tap Export Chat.",
+      "<span class='text-accent'>4. </span>Select if you want to Attach Media or email the chat Without Media.",
+      "<span class='text-accent'>5. </span>Open the <span class='text-accent'>file explorer</span> app. (You can also tap More for additional options.)"
+    ]
   },
   "meta": {
     "description": "Import your WhatsApp chat to view cool stats!"
-  }
+  },
+  "stats":{
+
+  },
+  "not-found": "Not Found!" 
 }
