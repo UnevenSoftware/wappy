@@ -1,8 +1,7 @@
 import { ref, Ref } from 'vue'
 import * as zip from "@zip.js/zip.js";
-import { Stats } from '~/workers/stats'
-// import WorkerStats from '~/workers/stats?worker&inline'
-// console.log(WorkerStats)
+import { Stats } from '~/composable/stats'
+import WorkerStats from '~/workers/worker-stats?worker'
 
 const readFileAsync = async (file: File): Promise<string> => {
 
@@ -25,7 +24,7 @@ const readFileAsync = async (file: File): Promise<string> => {
 
 const getStats = (file: File): Promise<Stats> => {
   return new Promise(async (resolve, reject) => {
-    const w = new Worker('worker-stats.js')
+    const w = new WorkerStats()
     w.onmessage = (e) => {
       const [status, data] = e.data
       if (status === 'SUCCESS') {
