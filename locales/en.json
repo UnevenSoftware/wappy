@@ -25,17 +25,20 @@
   "meta": {
     "description": "Import your WhatsApp chat to view cool stats!"
   },
-  "not-found": "Not Found!",
-  "chat-stats": "Chat Stats",
-  "messages": "Messages",
-  "media": "Media",
-  "hours-distribution": "Hours Distribution",
-  "most-used-words": "Most used words",
-  "most-used-emojis": "Most used emojis",
-  "user-stats": "User stats",
-  "of-all-messages": "of all messages",
-  "of-your-messages": "of yout messages",
-  "average-response-time": "Average response time",
-  "have-started": "Have started",
-  "conversations": "conversations"
+  "stats": {
+    "chat": "Chat Stats",
+    "messages": "Messages",
+    "media": "Media",
+    "hours": "Hours Distribution",
+    "words": "Most used words",
+    "emojis": "Most used emojis",
+    "user": {
+      "title": "User Stats",
+      "average": "Average response time",
+      "percentageMedia": "of your messages",
+      "percentageMessages": "of all messages",
+      "startedConversations": "Have started <span class='text-accent'>{0}</span> conversations."
+    }
+  },
+  "not-found": "Not Found!"
 }

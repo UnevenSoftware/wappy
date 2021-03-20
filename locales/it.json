@@ -25,17 +25,20 @@
   "meta": {
     "description": "Importa le tue chat di WhatsApp, e visualizza statistiche interessanti!"
   },
-  "not-found": "Not Found!",
-  "chat-stats": "Statistiche della chat",
-  "messages": "Messaggi",
-  "media": "Media",
-  "hours-distribution": "Distribuzione oraria",
-  "most-used-words": "Le parole più utilizzate",
-  "most-used-emojis": "Gli emojis più utilizzati",
-  "user-stats": "Statische degli utenti",
-  "of-all-messages": "su tutti i messaggi",
-  "of-your-messages": "dei tuoi messaggi",
-  "average-response-time": "Tempo di risposta medio",
-  "have-started": "Ha lanciato",
-  "conversations": "conversazioni"
+  "stats": {
+    "chat": "Statistiche della chat",
+    "messages": "Messaggi",
+    "media": "Media",
+    "hours": "Distribuzione oraria",
+    "words": "Le parole più frequenti",
+    "emojis": "Gli emojis più frequenti",
+    "user": {
+      "title": "Statistiche per utente",
+      "average": "Tempo di risposta medio",
+      "percentageMedia": "dei tuoi messaggi",
+      "percentageMessages": "di tutti i messaggi",
+      "startedConversations": "Ha avviato <span class='text-accent'>{0}</span> conversazioni."
+    }
+  },
+  "not-found": "Not Found!"
 }
