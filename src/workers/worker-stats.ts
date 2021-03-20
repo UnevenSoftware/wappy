@@ -1,5 +1,4 @@
 
-
 onmessage = async function (e) {
   try {
     const stats = await heavyStats(e.data)
@@ -60,9 +59,6 @@ const getMessageType = (message: string): 'message' | 'media' | 'system' => {
 }
 
 const heavyStats = async (content: string): Promise<any> => {
-
-  // console.log(`Reading File: ${file.name} | ${(file.size / 1024).toFixed(2)}KB`);
-  // const content = await readFileAsync(file)
 
   // date: (\d{1,2}\/\d{1,2}\/\d{2,4})
   // time: (.*?)
