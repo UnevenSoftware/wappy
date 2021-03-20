@@ -7,10 +7,10 @@
     <div class="p-4 dark:bg-dark-bgmessage_sender_quote bg-light-bgmessage_sender_quote rounded-lg shadow-md">
       <div class="flex items-center">
         <div class="flex flex-col">
-          <span class="text-2xl mb-0"> Messages</span>
+          <span class="text-2xl mb-0"> {{ t('stats.messages') }}</span>
           <span class="text-base text-light-label text-sm font-thin dark:text-dark-label font-normal pb-1">
-            <span class="text-accent"> {{ getPercentage(globalstats.count, userstats.messagesCount) }}%</span> of all
-            messages</span
+            <span class="text-accent"> {{ getPercentage(globalstats.count, userstats.messagesCount) }}%</span>
+            {{ t('stats.user.percentageMessages') }}</span
           >
         </div>
         <div class="text-4xl ml-auto text-center items-end flex font-bold text-primarylight">
@@ -21,10 +21,10 @@
 
       <div class="flex items-center">
         <div class="flex flex-col">
-          <span class="text-2xl mb-0">Media</span>
+          <span class="text-2xl mb-0">{{ t('stats.media') }}</span>
           <span class="text-base text-light-label text-sm dark:text-dark-label font-thin pb-1">
-            <span class="text-accent"> {{ getPercentage(userstats.messagesCount, userstats.mediaCount) }}%</span> of
-            your messages</span
+            <span class="text-accent"> {{ getPercentage(userstats.messagesCount, userstats.mediaCount) }}%</span>
+            {{ t('stats.user.percentageMedia') }}</span
           >
         </div>
         <div class="text-4xl ml-auto text-center items-end flex font-bold text-primarylight">
@@ -39,7 +39,7 @@
       <div class="rounded-lg flex">
         <i-bx-bx-timer class="text-2xl mx-2 my-auto text-primarylight" />
         <span class="text-lg">
-          Average response time <span class="text-accent">{{ formatTime(userstats.responseTime) }}</span>
+          {{ t('stats.user.average') }} <span class="text-accent">{{ formatTime(userstats.responseTime) }}</span>
         </span>
       </div>
     </div>
@@ -48,11 +48,7 @@
     >
       <div class="rounded-lg flex">
         <i-dashicons-format-chat class="text-2xl mx-2 my-auto text-primarylight" />
-        <span class="text-lg">
-          Have started
-          <span class="text-accent"> {{ userstats.startedConversations }}</span>
-          conversations.</span
-        >
+        <span class="text-lg" v-html="t('stats.user.startedConversations', [userstats.startedConversations])"> </span>
       </div>
     </div>
   </div>
@@ -60,7 +56,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { isDark, stringToHSL, formatTime, getPercentage, getProfileEmoji } from '~/utils'
+import { stringToHSL, formatTime, getPercentage, getProfileEmoji } from '~/utils'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   props: {
@@ -74,7 +71,8 @@ export default defineComponent({
     }
   },
   setup() {
-    return { stringToHSL, formatTime, getPercentage, getProfileEmoji }
+    const { t } = useI18n()
+    return { stringToHSL, t, formatTime, getPercentage, getProfileEmoji }
   }
 })
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="dark:text-dark-text text-light-text flex flex-col">
     <!-- CHAT STATS -->
-    <span class="mt-8 mb-4 text-4xl font-semibold">Chat Stats </span>
+    <span class="mt-8 mb-4 text-4xl font-semibold">{{ t('stats.chat') }}</span>
     <div class="rounded-lg p-6 shadow-lg space-y-10 dark:bg-dark-bglayer-2 bg-light-bglayer-2">
       <div class="grid-auto-flow md:grid-cols-2">
         <div class="my-auto text-center grid grid-cols-2 gap-2">
@@ -10,14 +10,14 @@
               {{ stats.messages }}</span
             >
             <br />
-            <span class="mx-auto font-bold tabular-nums oldstyle-nums">Messages</span>
+            <span class="mx-auto font-bold tabular-nums oldstyle-nums">{{ t('stats.messages') }}</span>
           </div>
           <div class="rounded-md p-6 shadow-lg text-2xl dark:bg-dark-bglayer-3 bg-light-bglayer-3">
             <span class="mx-auto text-5xl font-bold tabular-nums oldstyle-nums text-primarylight">
               {{ stats.medias }}</span
             >
             <br />
-            <span class="mx-auto font-bold tabular-nums oldstyle-nums">Media</span>
+            <span class="mx-auto font-bold tabular-nums oldstyle-nums">{{ t('stats.media') }}</span>
           </div>
         </div>
       </div>
@@ -25,13 +25,13 @@
       <!-- Hours Distribution -->
 
       <div class="space-y-4">
-        <span class="text-2xl mb-1 font-bold">Hours Distribution</span>
+        <span class="text-2xl mb-1 font-bold">{{ t('stats.hours') }}</span>
         <bar-chart class="" :hours="stats.hours"></bar-chart>
       </div>
 
       <!-- WORDS -->
       <div>
-        <label class="mt-6 text-2xl font-bold text">Most used words </label><br />
+        <label class="mt-6 text-2xl font-bold text">{{ t('stats.words') }} </label><br />
         <div v-if="stats.users" class="grid mt-2 grid-auto-flow md:grid-cols-2 lg:grid-cols-3 gap-2">
           <div
             v-for="(word, i) in stats.words"
@@ -52,7 +52,7 @@
 
       <!-- EMOJIS -->
       <div>
-        <label class="mt-6 text-2xl font-bold">Most used emojis </label><br />
+        <label class="mt-6 text-2xl font-bold">{{ t('stats.emojis') }} </label><br />
         <div v-if="stats.users" class="mt-2 grid grid-auto-flow grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
           <div
             v-for="(emoji, i) in stats.emoji"
@@ -71,7 +71,7 @@
 
     <!-- USER STATS -->
 
-    <span class="mt-8 mb-4 text-4xl font-semibold">User Stats </span>
+    <span class="mt-8 mb-4 text-4xl font-semibold">{{ t('stats.user.title') }} </span>
     <div
       v-if="stats.users"
       class="grid grid-auto-flow md:grid-cols-2 gap-2"
@@ -90,10 +90,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { isDark, getProfileEmoji, animeSlideUp } from '~/utils'
+import { defineComponent } from 'vue'
+import { getProfileEmoji, animeSlideUp } from '~/utils'
 import UserStats from './UserStats.vue'
-
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   components: { UserStats },
   props: {
@@ -110,7 +110,8 @@ export default defineComponent({
       }
     }
 
-    return { getProfileEmoji, setItemRef, itemRefs }
+    const { t } = useI18n()
+    return { getProfileEmoji, setItemRef, itemRefs, t }
   },
   mounted() {
     for (const ref of this.itemRefs) {
