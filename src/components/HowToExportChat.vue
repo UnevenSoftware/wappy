@@ -5,53 +5,37 @@
         <i-mdi-security class="my-auto mx-2" />
         <span class="my-auto">{{ t('export.security') }}</span>
       </div>
-
       <hr class="border-t-1 dark:border-primarydarker border-primarylight" />
-
       <div class="tex-center text-xl font-bold">{{ t('export.title') }}</div>
+
       <!-- android -->
-      <div class="text-2xl shadow-lg text-primarylight font-bold rounded-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
+      <div class="text-2xl shadow-lg text-primarylight font-bold rounded-lg 
+        dark:bg-dark-bglayer-2 bg-light-bglayer-2">
         <div class="rounded-lg p-6 w-full flex">
           <i-cib-android-alt class="text-4xl text-primarylight" />
           <span class="my-auto mx-6">{{ t('export.android') }}</span>
         </div>
 
-        <ul
-          class="text-lg text-left font-medium rounded-b-lg px-8 py-4 space-y-4 dark:bg-dark-bglayer-3 bg-light-bglayer-3 dark:text-dark-text text-light-text"
-        >
-          <li><span class="text-accent">1. </span>Open the individual or group chat</li>
-          <li class="flex flex-wrap break-all">
-            <span class="text-accent">2. </span>Tap More options
-            <i-fluent-more-vertical-28-filled class="text-accent my-auto" /> ➔ More ➔ Export chat.
-          </li>
-          <li><span class="text-accent">3. </span>Choose whether to export with media or without media.</li>
-          <li>
-            <span class="text-accent">4. </span>Choose where to save your files. (If you have a
-            <span class="text-accent">file explorer</span> app installed on your phone save it using the explorer and
-            then import)
+        <ul class="text-lg text-left font-medium rounded-b-lg px-8 py-4 space-y-4 
+          dark:bg-dark-bglayer-3 bg-light-bglayer-3 dark:text-dark-text text-light-text">
+          <li class="text-left font-light" v-for="i in 4" :key="i">
+            <span v-html="t(`export.android-steps[${i - 1}]`)"></span>
           </li>
         </ul>
       </div>
 
       <!-- apple -->
-      <div class="text-2xl shadow-lg text-primarylight font-bold rounded-lg dark:bg-dark-bglayer-2 bg-light-bglayer-2">
+      <div class="text-2xl text-blue-500 shadow-lg text-primarylight font-bold rounded-lg 
+      dark:bg-dark-bglayer-2 bg-light-bglayer-2">
         <div class="rounded-lg p-6 w-full flex">
           <i-cib-apple class="text-4xl text-primarylight" />
           <span class="my-auto mx-6">{{ t('export.ios') }}</span>
         </div>
 
-        <ul
-          class="text-lg text-left font-medium rounded-b-lg px-8 py-4 space-y-4 dark:bg-dark-bglayer-3 bg-light-bglayer-3 dark:text-dark-text text-light-text"
-        >
-          <li><span class="text-accent">1. </span>Open the individual or group chat you’d like to save.</li>
-          <li><span class="text-accent">2. </span>Tap the contact's name or group subject.</li>
-          <li><span class="text-accent">3. </span>Tap Export Chat.</li>
-          <li>
-            <span class="text-accent">4. </span>Select if you want to Attach Media or email the chat Without Media.
-          </li>
-          <li>
-            <span class="text-accent">4. </span>Open the <span class="text-accent">file explorer</span> app. (You can
-            also tap More for additional options.)
+        <ul class="text-lg text-left text-blue-500 font-medium rounded-b-lg px-8 py-4 space-y-4 
+          dark:bg-dark-bglayer-3 bg-light-bglayer-3 dark:text-dark-text text-light-text">
+          <li class="text-left font-light" v-for="i in 5" :key="i">
+            <span v-html="t(`export.ios-steps[${i - 1}]`)"></span>
           </li>
         </ul>
       </div>
