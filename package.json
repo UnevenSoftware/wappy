@@ -17,6 +17,7 @@
     "@zip.js/zip.js": "^2.2.23",
     "animejs": "^3.2.1",
     "chart.js": "^2.9.4",
+    "html2canvas": "^1.0.0-rc.7",
     "vue": "^3.0.6",
     "vue-i18n": "^9.0.0",
     "vue-router": "^4.0.4"

@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
 import { createRouter, createWebHistory } from 'vue-router'
 import messages from '@intlify/vite-plugin-vue-i18n/messages'
-
 import routes from 'virtual:generated-pages';
 
 import App from './App.vue'
@@ -19,6 +18,7 @@ const router = createRouter({
 })
 app.use(router)
 
+// generate image
 
 // i18n
 const i18n = createI18n({

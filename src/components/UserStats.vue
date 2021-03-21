@@ -9,7 +9,7 @@
       <div class="flex items-center">
         <div class="flex flex-col">
           <span class="text-2xl mb-0"> {{ t('stats.messages') }}</span>
-          <span class="text-base text-light-label text-sm font-thin dark:text-dark-label font-normal pb-1">
+          <span class="text-base text-light-label text-sm dark:text-dark-label pb-1">
             <span class="text-accent"> {{ getPercentage(globalstats.count, userstats.messagesCount) }}%</span>
               {{ t('stats.user.percentageMessages') }}
             </span>
@@ -23,7 +23,7 @@
       <div class="flex items-center">
         <div class="flex flex-col">
           <span class="text-2xl mb-0">{{ t('stats.media') }}</span>
-          <span class="text-base text-light-label text-sm dark:text-dark-label font-thin pb-1">
+          <span class="text-base text-light-label text-sm dark:text-dark-label pb-1">
             <span class="text-accent"> {{ getPercentage(userstats.messagesCount, userstats.mediaCount) }}%</span>
             {{ t('stats.user.percentageMedia') }}
           </span>
