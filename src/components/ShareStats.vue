@@ -81,7 +81,7 @@
 
 
 
-    <img  class="my-16 rounded-lg" v-if="shareImg" :src="shareImg"/>
+    <!--<img  class="my-16 rounded-lg" v-if="shareImg" :src="shareImg"/>-->
   </div>
 </template>
 <script lang="ts">
