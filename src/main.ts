@@ -9,6 +9,7 @@ import routes from 'virtual:generated-pages';
 
 import App from './App.vue'
 import { createHead } from '@vueuse/head'
+import { getUserLang } from './utils'
 
 const app = createApp(App)
 
@@ -19,11 +20,11 @@ const router = createRouter({
 })
 app.use(router)
 
-
 // i18n
 const i18n = createI18n({
   legacy: false,
-  locale: 'en',
+  locale: getUserLang('en'),
+  fallbackLocale: 'en',
   messages
 })
 
