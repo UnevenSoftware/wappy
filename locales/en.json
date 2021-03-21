@@ -27,6 +27,7 @@
   },
   "stats": {
     "chat": "Chat Stats",
+    "of-chat": "of the chat",
     "messages": "Messages",
     "media": "Media",
     "hours": "Hours Distribution",
@@ -41,5 +42,5 @@
     }
   },
   "not-found": "Not Found!",
-  "share": "Share your stats!"
+  "share": "Download & Share!"
 }
