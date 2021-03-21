@@ -27,6 +27,7 @@
   },
   "stats": {
     "chat": "Statistiche della chat",
+    "of-chat": "della chat",
     "messages": "Messaggi",
     "media": "Media",
     "hours": "Distribuzione oraria",
@@ -40,5 +41,6 @@
       "startedConversations": "Ha avviato <span class='text-accent'>{0}</span> conversazioni."
     }
   },
-  "not-found": "Not Found!"
+  "not-found": "Not Found!",
+  "share": "Scarica e Condividi!"
 }

@@ -20,17 +20,68 @@
 
       </div>
     </div>
+
     <!--Share Stats-->
     <div id="shareStatsContainer" ref="shareStatsRef" 
-      class="invisible absolute top-0 p-8 rounded-lg border-2
+      class="invisible absolute fixed left-0 top-0 p-4 rounded-lg border-2
       dark:(bg-dark-bg text-dark-text  border-text-dark-bglayer-2) 
       bg-light-bg text-light-text  border-text-light-bglayer-2" 
         :style="getBgPattern()">
-        
-        {{stats}}
 
+
+
+
+        <!-- General Stats-->
+        <div class="m-2 p-6 space-y-6 rounded-lg dark:bg-dark-bglayer-1 bg-light-bglayer-1 ">
+          <div class="rounded-lg  "> Made with <span class="text-primarylight">Wappy</span> 💌</div>
+          
+          <div>
+            <!--Messages-->
+            <div class="flex items-center">
+              <div class="flex flex-col">
+                <span class="text-2xl mb-0"> {{ t('stats.messages') }}</span>
+                <span class="text-base text-light-label text-sm dark:text-dark-label pb-1">
+                  <span class="text-accent"> {{ getPercentage(stats.count, stats.messages) }}%</span>
+                    {{ t('stats.of-chat') }}
+                  </span>
+              </div>
+              <div class="text-4xl ml-auto text-center items-end flex font-bold text-primarylight">
+                {{ stats.messages }} {{getProfileEmoji()}}
+              </div>
+            </div>
+            <!---line-->
+            <hr class="border-t-1 my-2 dark:border-primarydarker border-primarylight" />
+            <!--Medias-->  
+            <div class="flex items-center">
+              <div class="flex flex-col">
+                <span class="text-2xl mb-0"> {{ t('stats.media') }}</span>
+                <span class="text-base text-light-label text-sm dark:text-dark-label pb-1">
+                  <span class="text-accent"> {{ getPercentage(stats.count, stats.medias) }}%</span>
+                    {{ t('stats.of-chat') }}
+                  </span>
+              </div>
+              <div class="text-4xl ml-auto text-center items-end flex font-bold text-primarylight">
+                {{ stats.medias }} {{getProfileEmoji()}}
+              </div>
+            </div>
+          </div>
+
+          <!--hours--->
+          <div class="space-y-4">
+            <span class="text-2xl mb-1 font-bold">{{ t('stats.hours') }}</span>
+            <bar-chart class="" :hours="stats.hours"></bar-chart>
+          </div>
+
+        
+          <span class="rounded-lg my-auto flex justify-end text-accent"> 💌 {{website}}</span>  
+        </div>
     </div>
-    <img  class="my-16 rounded-lg" v-if="shareImg" :src="shareImg"/>
+
+
+
+
+
+    <!--<img  class="my-16 rounded-lg" v-if="shareImg" :src="shareImg"/>-->
   </div>
 </template>
 <script lang="ts">
@@ -41,7 +92,7 @@ import html2canvas from 'html2canvas';
 
 export default defineComponent({
   props: {
-  stats: {
+    stats: {
       type: Object,
       required: true
     } 
@@ -57,8 +108,9 @@ export default defineComponent({
       this.loading = true;
       const el = this.shareStatsRef;
       let options = {
-        scrollX: -9,
-        scrollY: -(window.scrollY) ,
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        scrollX: 0,
+        scrollY: -window.scrollY,
         onclone: function(doc){
             console.log("doc", doc.getElementById("shareStatsContainer"));
             doc.getElementById("shareStatsContainer").classList.remove('invisible');
@@ -67,20 +119,29 @@ export default defineComponent({
       }
       let canvas = await html2canvas(el, options);
       this.shareImg = canvas.toDataURL();
+      
+      /* download img */
+      var link = document.createElement('a');
+      link.href = this.shareImg;
+      link.download = 'Download.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
       this.loading = false;
     }
   },
   setup() {
     let shareStatsRef = ref();
     const { t } = useI18n()
-
+    const website = document.URL;
     const getBgPattern = function () {
       return isDark.value
         ? 'background-image: linear-gradient(rgba(19, 28, 33, 0.9), rgba(19, 28, 33, 0.9)), url(bg-dark.png);'
         : 'background-image: linear-gradient(rgba(223, 216, 208, 0.9), rgba(223, 216, 208, 0.9)), url(bg-light.png);'
     }
 
-    return { shareStatsRef , t, getBgPattern, getProfileEmoji, getPercentage};
+    return { shareStatsRef , t, getBgPattern, getProfileEmoji, getPercentage, website};
   },
 })
 </script>
