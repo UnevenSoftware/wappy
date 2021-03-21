@@ -57,4 +57,5 @@ const getProfileEmoji = (): any => {
   return emojis[Math.floor(Math.random() * (emojis.length - 1))];
 }
 
+
 export { stringToHSL, formatTime, getPercentage, getProfileEmoji };

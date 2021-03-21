@@ -40,5 +40,6 @@
       "startedConversations": "Have started <span class='text-accent'>{0}</span> conversations."
     }
   },
-  "not-found": "Not Found!"
+  "not-found": "Not Found!",
+  "share": "Share your stats!"
 }
