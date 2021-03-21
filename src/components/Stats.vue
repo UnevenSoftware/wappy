@@ -68,31 +68,18 @@
 
     <!-- USER STATS -->
     <span class="mt-8 mb-4 text-4xl font-semibold">{{ t('stats.user.title') }} </span>
-    <div ref="printMe"
-      v-if="stats.users"
-      class="grid grid-auto-flow md:grid-cols-2 gap-2"
+    <div v-if="stats.users"
+      class=" grid grid-auto-flow md:grid-cols-2 gap-2"
       :class="stats.users.length > 2 ? 'xl:grid-cols-3' : 'xl:grid-cols-2'">
       <user-stats
         :ref="setItemRef"
         v-for="(userstats, i) in stats.users"
         :key="i"
         :globalstats="{ count: stats.count }"
-        :userstats="userstats"
-      >
+        :userstats="userstats">
       </user-stats>
     </div>
-    <div class="flex justify-center">
-    <div class="mt-8 p-6 sm:w-full md:w-auto text-center rounded-xl border-2 shadow-lg cursor-pointer
-      dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
-      dark:hover:border-dark-bgmessage_sender_quote dark:hover:bg-dark-bgmessage_sender
-    
-      bg-light-bgmessage_sender_quote border-light-bgmessage_sender
-      hover:border-light-bgmessage_sender_quote hover:bg-light-bgmessage_sender"
-      @click="print()">
-        <i-dashicons-share class="text-xl"/> <span class="text-xl font-bold">{{t('share')}}</span>
-    </div>
-    </div>
-    <img v-if="output" :src="output"/>
+    <share-stats :stats="stats"/>
   </div>
 </template>
 
@@ -101,52 +88,25 @@ import { useI18n } from 'vue-i18n'
 import { defineComponent, ref } from 'vue'
 import { isDark, getProfileEmoji, animeSlideUp } from '~/utils'
 import UserStats from './UserStats.vue'
-import html2canvas from 'html2canvas';
-
+import ShareStats from './ShareStats.vue';
 
 export default defineComponent({
-  components: { UserStats },
+  components: { UserStats, ShareStats },
   props: {
     stats: {
       type: Object,
       required: true
     }
   },
-  data() { 
-    return{
-      output: null
-    }
-  },
-  methods: {
-    async print(){
-      
-      const el = this.printMe;
-      let options = {
-        scrollX: 0,
-        scrollY: -(window.scrollY)
-      }
-      let canvas = await html2canvas(el, options);
-      //document.body.appendChild(canvas);
-      this.output = canvas.toDataURL();
-      console.log(this.printMe);
-    }
-
-  },
   setup() {
     const { t } = useI18n()
-    let printMe = ref();
     let itemRefs: [] = []
     const setItemRef = (el) => {
       if (el) {
         itemRefs.push(el)
       }
     }
-
-    const share = function(stats: any){
-      console.log("share", stats);
-    }
-
-    return { getProfileEmoji, setItemRef, itemRefs, t, share, printMe }
+    return { getProfileEmoji, setItemRef, itemRefs, t }
   },
   mounted() {
     for (const ref of this.itemRefs) {
