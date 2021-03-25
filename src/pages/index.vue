@@ -19,7 +19,7 @@
 <script lang="ts">
 import { ref, defineComponent, watch } from 'vue'
 import useStats from '~/composable/useStats'
-import { animeSlideUp } from '~/utils'
+import { animeSlideUp, mockStats } from '~/utils'
 
 export default defineComponent({
   mounted() {
@@ -30,7 +30,7 @@ export default defineComponent({
     const errRef = ref()
     const infoRef = ref()
 
-    let { stats, readFile, loading, error } = useStats()
+    let { stats, readFile, loading, error } = useStats(mockStats(/*true*/))
 
     watch(error, async function (e) {
       console.log('event', e)

@@ -1,0 +1,146 @@
+{
+  "count": 3416,
+  "messages": 3111,
+  "medias": 305,
+  "users": [
+    {
+      "username": "Jibo",
+      "messagesCount": 1712,
+      "mediaCount": 180,
+      "responseTime": "278",
+      "startedConversations": 124
+    },
+    {
+      "username": "Donald",
+      "messagesCount": 674,
+      "mediaCount": 58,
+      "responseTime": "384",
+      "startedConversations": 69
+    },
+    {
+      "username": "Sburzi",
+      "messagesCount": 722,
+      "mediaCount": 66,
+      "responseTime": "242",
+      "startedConversations": 79
+    },
+    {
+      "username": "Cisco",
+      "messagesCount": 3,
+      "mediaCount": 1,
+      "responseTime": "2625",
+      "startedConversations": 0
+    }
+  ],
+  "hours": {
+    "0": 0,
+    "1": 1,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 9,
+    "9": 111,
+    "10": 141,
+    "11": 258,
+    "12": 52,
+    "13": 185,
+    "14": 319,
+    "15": 296,
+    "16": 389,
+    "17": 288,
+    "18": 196,
+    "19": 108,
+    "20": 235,
+    "21": 138,
+    "22": 168,
+    "23": 172,
+    "24": null
+  },
+  "words": [
+    {
+      "word": "bruh",
+      "count": 50
+    },
+    {
+      "word": "ahahah",
+      "count": 48
+    },
+    {
+      "word": "raga",
+      "count": 44
+    },
+    {
+      "word": "cool",
+      "count": 43
+    },
+    {
+      "word": "figo",
+      "count": 37
+    },
+    {
+      "word": "fucking",
+      "count": 33
+    },
+    {
+      "word": "c'è",
+      "count": 32
+    },
+    {
+      "word": "shit",
+      "count": 32
+    },
+    {
+      "word": "cazzo",
+      "count": 29
+    },
+    {
+      "word": "figa",
+      "count": 28
+    }
+  ],
+  "emoji": [
+    {
+      "word": "😂",
+      "count": 40
+    },
+    {
+      "word": "💔",
+      "count": 26
+    },
+    {
+      "word": "😅",
+      "count": 18
+    },
+    {
+      "word": "😔",
+      "count": 15
+    },
+    {
+      "word": "💕",
+      "count": 7
+    },
+    {
+      "word": "💖",
+      "count": 5
+    },
+    {
+      "word": "🙄",
+      "count": 4
+    },
+    {
+      "word": "😯",
+      "count": 3
+    },
+    {
+      "word": "🤍",
+      "count": 3
+    },
+    {
+      "word": "😭",
+      "count": 3
+    }
+  ]
+}
