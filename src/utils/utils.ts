@@ -1,4 +1,7 @@
 import { isDark } from './dark'
+import html2canvas from 'html2canvas';
+import { Ref } from 'vue-demi';
+
 /**
  * Given a string calculates a random color in HSL format, 
  * also checks if current theme is dark adjusting light of the color
@@ -57,5 +60,32 @@ const getProfileEmoji = (): any => {
   return emojis[Math.floor(Math.random() * (emojis.length - 1))];
 }
 
+/**
+ * given an html element ref returns a screenshot of the container
+ * @param ref 
+ * @returns Image / screenshot of the div
+ */
+const containerScreenShot = async (ref:HTMLElement) => {
+  let options = {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    scrollX: 0,
+    scrollY: -window.scrollY,
+    onclone: function(document: any){
+        document.getElementById(ref.id).classList.remove('invisible');
+        document.getElementById(ref.id).classList.add('visible');
+    }
+  }
+  let canvas = await html2canvas(ref, options);
+  return canvas.toDataURL();
+}
 
-export { stringToHSL, formatTime, getPercentage, getProfileEmoji };
+const downloadImage = (img) => {
+  let link = document.createElement('a');
+  link.href = img;
+  link.download = 'Download.png';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+export { stringToHSL, formatTime, getPercentage, getProfileEmoji, containerScreenShot, downloadImage };

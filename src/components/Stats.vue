@@ -55,8 +55,7 @@
             v-for="(emoji, i) in stats.emoji"
             :key="i"
             :ref="setItemRef"
-            :class="i >= stats.emoji.length - 2 ? 'col-span-1 md:col-span-2 lg:col-span-1' : ''"
-          >
+            :class="i >= stats.emoji.length - 2 ? 'col-span-1 md:col-span-2 lg:col-span-1' : ''">
             <div class="p-6 rounded-md flex shadow-lg dark:bg-dark-bglayer-3 bg-light-bglayer-3">
               <label class="font-bold text-3xl my-auto text-primarylight">{{ emoji.count }} </label><br />
               <span class="text-3xl mx-auto my-auto font-bold">{{ emoji.word }} </span>

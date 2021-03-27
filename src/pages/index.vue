@@ -6,20 +6,20 @@
     <div
       ref="errRef"
       v-if="error"
-      class="p-6 my-4 rounded-lg text-lg font-semibold text-red-900 bg-red-500 flex flex-wrap lg:flex-no-wrap justify-center"
-    >
+      class="p-6 my-4 rounded-lg text-lg font-semibold text-red-900 bg-red-500 flex flex-wrap lg:flex-no-wrap justify-center">
       <i-fluent-document-error-20-filled class="my-auto mx-2 w-6 h-6" />
       <span class="my-auto">{{ error }}</span>
     </div>
 
     <stats v-if="stats && !loading" :stats="stats"> </stats>
+    
     <how-to-export-chat v-show="!stats && !loading" />
   </div>
 </template>
 <script lang="ts">
 import { ref, defineComponent, watch } from 'vue'
 import useStats from '~/composable/useStats'
-import { animeSlideUp } from '~/utils'
+import { animeSlideUp, mockStats } from '~/utils'
 
 export default defineComponent({
   mounted() {
@@ -28,9 +28,8 @@ export default defineComponent({
   setup() {
     const uRef = ref()
     const errRef = ref()
-    const infoRef = ref()
 
-    let { stats, readFile, loading, error } = useStats()
+    let { stats, readFile, loading, error } = useStats(mockStats(/*true*/))
 
     watch(error, async function (e) {
       console.log('event', e)
