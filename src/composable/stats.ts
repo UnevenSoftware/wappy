@@ -1,4 +1,5 @@
 interface Stats {
+  filename: string,
   count: number
   messages: number
   medias: number

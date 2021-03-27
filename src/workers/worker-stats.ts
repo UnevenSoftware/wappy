@@ -146,10 +146,7 @@ const heavyStats = async (content: string): Promise<any> => {
       }
     }
 
-    lastMessage = {
-      username,
-      datetime
-    }
+    lastMessage = { username, datetime }
   }
 
   const users = Object.entries(userCounters).map((entry) => {

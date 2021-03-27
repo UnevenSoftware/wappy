@@ -55,7 +55,6 @@ const useStats = (mock?: Stats): IUseStats => {
   const loading = ref<boolean>(false)
   const progress = ref<number>(0) // 0 -> 1
   const error = ref<Error | undefined>(undefined)
-
   const readFile = async (file: File) => {
 
     console.time("readFile")
@@ -64,6 +63,7 @@ const useStats = (mock?: Stats): IUseStats => {
     if (isValidFile(file)) {
       try {
         stats.value = await getStats(file);
+        stats.value.filename = file.name
       } catch (e) {
         console.error(e)
         error.value = e

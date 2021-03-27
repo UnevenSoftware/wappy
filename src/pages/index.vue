@@ -12,6 +12,7 @@
     </div>
 
     <stats v-if="stats && !loading" :stats="stats"> </stats>
+    
     <how-to-export-chat v-show="!stats && !loading" />
   </div>
 </template>
@@ -27,7 +28,6 @@ export default defineComponent({
   setup() {
     const uRef = ref()
     const errRef = ref()
-    const infoRef = ref()
 
     let { stats, readFile, loading, error } = useStats(mockStats(/*true*/))
 
