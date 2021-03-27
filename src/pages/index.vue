@@ -6,8 +6,7 @@
     <div
       ref="errRef"
       v-if="error"
-      class="p-6 my-4 rounded-lg text-lg font-semibold text-red-900 bg-red-500 flex flex-wrap lg:flex-no-wrap justify-center"
-    >
+      class="p-6 my-4 rounded-lg text-lg font-semibold text-red-900 bg-red-500 flex flex-wrap lg:flex-no-wrap justify-center">
       <i-fluent-document-error-20-filled class="my-auto mx-2 w-6 h-6" />
       <span class="my-auto">{{ error }}</span>
     </div>

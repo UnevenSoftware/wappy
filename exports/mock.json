@@ -4,8 +4,8 @@
   "medias": 305,
   "users": [
     {
-      "username": "Jibo",
-      "messagesCount": 1712,
+      "username": "Jhon",
+      "messagesCount": 712,
       "mediaCount": 180,
       "responseTime": "278",
       "startedConversations": 124
@@ -18,18 +18,18 @@
       "startedConversations": 69
     },
     {
-      "username": "Sburzi",
+      "username": "Lorenzo",
       "messagesCount": 722,
       "mediaCount": 66,
       "responseTime": "242",
       "startedConversations": 79
     },
     {
-      "username": "Cisco",
-      "messagesCount": 3,
-      "mediaCount": 1,
+      "username": "David",
+      "messagesCount": 329,
+      "mediaCount": 200,
       "responseTime": "2625",
-      "startedConversations": 0
+      "startedConversations": 23
     }
   ],
   "hours": {
@@ -69,7 +69,7 @@
       "count": 48
     },
     {
-      "word": "raga",
+      "word": "music",
       "count": 44
     },
     {
@@ -77,27 +77,27 @@
       "count": 43
     },
     {
-      "word": "figo",
+      "word": "dev",
       "count": 37
     },
     {
-      "word": "fucking",
+      "word": "meme",
       "count": 33
     },
     {
-      "word": "c'è",
+      "word": "youtube",
       "count": 32
     },
     {
-      "word": "shit",
+      "word": "party",
       "count": 32
     },
     {
-      "word": "cazzo",
+      "word": "film",
       "count": 29
     },
     {
-      "word": "figa",
+      "word": "anime",
       "count": 28
     }
   ],
@@ -120,7 +120,7 @@
     },
     {
       "word": "💕",
-      "count": 7
+      "count": 14
     },
     {
       "word": "💖",
@@ -128,19 +128,19 @@
     },
     {
       "word": "🙄",
-      "count": 4
+      "count": 8
     },
     {
       "word": "😯",
-      "count": 3
+      "count": 17
     },
     {
       "word": "🤍",
-      "count": 3
+      "count": 10
     },
     {
       "word": "😭",
-      "count": 3
+      "count": 312
     }
   ]
 }
