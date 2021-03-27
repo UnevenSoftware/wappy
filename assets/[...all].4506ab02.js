@@ -1,0 +1,1 @@
+import{u as t}from"./index.62a08991.js";import{d as s,b as e,e as n,t as o,o as a}from"./vendor.5416709e.js";const r={class:"text-center"};var m=s({expose:[],setup(s){const m=t(),u=()=>m.push({name:"index"});return(t,s)=>(a(),e("div",r,[n("p",null,o(t.t("not-found")),1),n("div",null,[n("button",{class:"btn m-3 text-sm mt-8",onClick:u},"Home")])]))}});export default m;
