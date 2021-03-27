@@ -33,8 +33,6 @@
 
         <!-- General Stats-->
         <div class="m-2 p-6 space-y-6 rounded-lg dark:bg-dark-bglayer-1 bg-light-bglayer-1 ">
-          <div class="rounded-lg  "> Made with <span class="text-primarylight">Wappy</span> 💌</div>
-          
           <div>
             <!--Messages-->
             <div class="flex items-center">
@@ -72,8 +70,8 @@
             <bar-chart class="" :hours="stats.hours"></bar-chart>
           </div>
 
-        
-          <span class="rounded-lg my-auto flex justify-end text-accent"> 💌 {{website}}</span>  
+          <div class="rounded-lg  "> Made with <span class="text-primarylight">Wappy</span> 💌</div>  
+          <!--<span class="rounded-lg my-auto flex justify-end text-accent"> 💌 {{website}}</span>  -->
         </div>
     </div>
 
@@ -87,8 +85,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { isDark, getProfileEmoji, getPercentage } from '~/utils'
-import html2canvas from 'html2canvas';
+import { isDark, getProfileEmoji, getPercentage, containerScreenShot, downloadImage } from '~/utils'
 
 export default defineComponent({
   props: {
@@ -106,28 +103,7 @@ export default defineComponent({
   methods: {
     async share(){
       this.loading = true;
-      const el = this.shareStatsRef;
-      let options = {
-        backgroundColor: "rgba(0, 0, 0, 0)",
-        scrollX: 0,
-        scrollY: -window.scrollY,
-        onclone: function(doc){
-            console.log("doc", doc.getElementById("shareStatsContainer"));
-            doc.getElementById("shareStatsContainer").classList.remove('invisible');
-            doc.getElementById("shareStatsContainer").classList.add('visible');
-        }
-      }
-      let canvas = await html2canvas(el, options);
-      this.shareImg = canvas.toDataURL();
-      
-      /* download img */
-      var link = document.createElement('a');
-      link.href = this.shareImg;
-      link.download = 'Download.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
+      downloadImage(await containerScreenShot(this.shareStatsRef));
       this.loading = false;
     }
   },
