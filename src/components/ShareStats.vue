@@ -1,5 +1,6 @@
 <template>
   <div>
+    
 
     <!--Share Stats-->
     <div id="shareStatsContainer" ref="shareStatsRef" 
@@ -7,7 +8,6 @@
       dark:(bg-dark-bg text-dark-text  border-text-dark-bglayer-2) 
       bg-light-bg text-light-text  border-text-light-bglayer-2" 
       :style="getBgPattern()">
-
 
       <div class="m-2 p-6 space-y-6 rounded-lg dark:bg-dark-bglayer-1 bg-light-bglayer-2 shadow-lg ">
         <span class="text-2xl m-2 text-primarylight justify-center flex font-bold"> {{ getChatName() }}</span>
@@ -66,7 +66,6 @@
               border-light-bgmessage_sender">
                 "{{ stats.words.map((w) => w.word).join(' ') }}" -cit {{ getProfileEmoji() }}
             </div>
-          
 
             <!-- EMOJIS -->
             <label class="mt-6 text-2xl font-bold">{{ t('stats.emojis') }} </label><br />
@@ -84,7 +83,6 @@
         </div>
 
         <div v-if="screenshots[selectedScreenshot] === 'Users'">
-          <span class="mt-8 mb-4 text-4xl font-semibold">{{ t('stats.user.title') }} </span>
           <div v-if="stats.users"
             class=" grid grid-auto-flow md:grid-cols-2 gap-2"
             :class="stats.users.length > 2 ? 'xl:grid-cols-3' : 'xl:grid-cols-2'">
@@ -98,7 +96,6 @@
           </div>
         </div>
 
-
         <!-- screenshot footer -->
         <div class="rounded-lg "> Made with <span class="text-primarylight">Wappy</span> 💌</div>  
         <!--<span class="rounded-lg my-auto flex justify-end text-accent"> 💌 {{website}}</span>  -->
@@ -107,18 +104,43 @@
     </div>
     <!--<img  class="my-16 rounded-lg" v-if="shareImg" :src="shareImg"/>-->
 
+    <div class="flex space-x-4 justify-between my-4">
+            
+      <div class=" p-6  text-center text-xl rounded-xl border-2 shadow-lg cursor-pointer
+        dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
+        dark:hover:border-dark-bgmessage_sender_quote dark:hover:bg-dark-bgmessage_sender
+        dark:text-dark-text text-light-text
+        bg-light-bgmessage_sender_quote border-light-bgmessage_sender
+        hover:border-light-bgmessage_sender_quote hover:bg-light-bgmessage_sender transform scale-x-n1"
+          @click="(selectedScreenshot -1 >= 0) ? selectedScreenshot -= 1 : selectedScreenshot = screenshots.length-1">
+          <i-grommet-icons-form-next-link class="dark:text-dark-icon text-light-icon mx-4 "/>
+      </div>
 
+      <div class="text-2xl my-auto flex justify-center text-primarylight
+        rounded-xl border-2 shadow-lg 
+        dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
+         p-6 w-full">{{screenshots[selectedScreenshot]}} Stats</div>
 
-
-    <div class="flex justify-center">
-      
-      <div class="mt-6 p-6 w-full text-center text-xl rounded-xl border-2 shadow-lg cursor-pointer
+      <div class=" p-6  text-center text-xl rounded-xl border-2 shadow-lg cursor-pointer
         dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
         dark:hover:border-dark-bgmessage_sender_quote dark:hover:bg-dark-bgmessage_sender
         dark:text-dark-text text-light-text
         bg-light-bgmessage_sender_quote border-light-bgmessage_sender
         hover:border-light-bgmessage_sender_quote hover:bg-light-bgmessage_sender"
-          @click="!loading ? share() : {}">
+          @click="(selectedScreenshot +1 < screenshots.length) ? selectedScreenshot += 1 : selectedScreenshot = 0">
+          <i-grommet-icons-form-next-link class="dark:text-dark-icon text-light-icon mx-4"/>
+      </div>
+
+    </div>  
+    <div class="flex justify-center">
+      
+      <div class=" p-6 w-full text-center text-xl rounded-xl border-2 shadow-lg cursor-pointer
+        dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
+        dark:hover:border-dark-bgmessage_sender_quote dark:hover:bg-dark-bgmessage_sender
+        dark:text-dark-text text-light-text
+        bg-light-bgmessage_sender_quote border-light-bgmessage_sender
+        hover:border-light-bgmessage_sender_quote hover:bg-light-bgmessage_sender"
+        @click="!loading ? share() : {}">
           
           <div v-if="!loading" class="my-auto">
             <i-dashicons-share class="dark:text-dark-icon text-light-icon mx-4"/><span>{{t('share')}}</span>
@@ -131,34 +153,6 @@
 
       </div>
     </div>
-
-    <div class="flex space-x-8">
-      
-      
-      <div class="mt-6 p-6 w-full text-center text-xl rounded-xl border-2 shadow-lg cursor-pointer
-        dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
-        dark:hover:border-dark-bgmessage_sender_quote dark:hover:bg-dark-bgmessage_sender
-        dark:text-dark-text text-light-text
-        bg-light-bgmessage_sender_quote border-light-bgmessage_sender
-        hover:border-light-bgmessage_sender_quote hover:bg-light-bgmessage_sender transform scale-x-n1"
-          @click="(selectedScreenshot -1 >= 0) ? selectedScreenshot -= 1 : selectedScreenshot = screenshots.length-1">
-          <i-grommet-icons-form-next-link class="dark:text-dark-icon text-light-icon mx-4 "/>
-      </div>
-
-
-
-      <div class="mt-6 p-6 w-full text-center text-xl rounded-xl border-2 shadow-lg cursor-pointer
-        dark:bg-dark-bgmessage_sender_quote dark:border-dark-bgmessage_sender 
-        dark:hover:border-dark-bgmessage_sender_quote dark:hover:bg-dark-bgmessage_sender
-        dark:text-dark-text text-light-text
-        bg-light-bgmessage_sender_quote border-light-bgmessage_sender
-        hover:border-light-bgmessage_sender_quote hover:bg-light-bgmessage_sender"
-          @click="(selectedScreenshot +1 < screenshots.length) ? selectedScreenshot += 1 : selectedScreenshot = 0">
-          <i-grommet-icons-form-next-link class="dark:text-dark-icon text-light-icon mx-4"/>
-      </div>
-      
-    </div>  
-
   </div>
 </template>
 <script lang="ts">
